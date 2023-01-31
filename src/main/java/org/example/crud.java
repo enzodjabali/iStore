@@ -9,7 +9,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class crud {
     Connection connect;
-    String userEmail ="";
+    String userEmail;
+    String userId;
     Dotenv dotenv = Dotenv.configure().load();
 
     public void dbconnect() {
@@ -38,33 +39,29 @@ public class crud {
             Statement statement;
             statement = connect.createStatement();
             ResultSet resultSet;
-
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(pwdToCheck.getBytes(StandardCharsets.UTF_8));
-            String passwordToCheck = new String(hash, StandardCharsets.UTF_8);
-
-            resultSet = statement.executeQuery("SELECT * FROM users WHERE email ='"+emailToCheck+"' AND password ='"+passwordToCheck+"'");
-            String email = "";
-            String password = "";
-            int counter = 0;
-            while (resultSet.next()) {
-                counter++;
-                email = resultSet.getString("email");
-                password = resultSet.getString("password");
-            }
-            resultSet.close();
-            statement.close();
-            if ((emailToCheck).equals(email) && passwordToCheck.equals(password)){
-                userEmail = emailToCheck;
+            resultSet = statement.executeQuery("SELECT * FROM users WHERE email ='"+emailToCheck+"' AND password ='"+encryptPassword(pwdToCheck)+"'");
+            if(resultSet.next()) {
+                userId = resultSet.getString("id");
+                userEmail = resultSet.getString("email");
                 return true;
-            } else {
-                return false;
             }
-        } catch (Exception exception){
-            System.out.println(exception);
+        } catch (Exception e){
+            System.out.println(e);
         }
         return false;
     }
+    public String encryptPassword(String pwdToCheck) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(pwdToCheck.getBytes(StandardCharsets.UTF_8));
+            pwdToCheck = new String(hash, StandardCharsets.UTF_8);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return pwdToCheck;
+    }
+
     public boolean userRegister(String pseudo, String email, String password){
         try{
             Statement statementEmail;
@@ -102,7 +99,7 @@ public class crud {
             ResultSet resultSetCheckRole;
 
             resultSetCheckRole = statementEmail.executeQuery("SELECT role FROM users WHERE email ='"+userEmail+"'");
-            while(resultSetCheckRole.next()){
+            if(resultSetCheckRole.next()){
                 //Vérifie si la requête vient d'un admin
                 if(!resultSetCheckRole.getString("role").equals("admin")){
                     return false;
@@ -117,20 +114,13 @@ public class crud {
         }
     return true;
     }
-    public boolean setAdmin(String userToSetAdmin) {
+    public boolean setAdmin(String userEmailToSetAdmin) {
         try {
-            Statement statementEmail = connect.createStatement();
-            ResultSet resultSetCheckRole;
-
-            resultSetCheckRole = statementEmail.executeQuery("SELECT role FROM users WHERE email ='" + userEmail + "'");
-            while (resultSetCheckRole.next()) {
-                //Vérifie si la requête vient d'un admin
-                if (!resultSetCheckRole.getString("role").equals("admin")) {
-                    return false;
-                }
+            if(!checkIfAdmin()){
+                return false;
             }
             Statement statement = connect.createStatement();
-            String sql = "UPDATE users SET role = 'admin' WHERE email = '" + userToSetAdmin + "'";
+            String sql = "UPDATE users SET role = 'admin' WHERE email = '" + userEmailToSetAdmin + "'";
             statement.executeUpdate(sql);
 
         } catch (Exception e) {
@@ -138,5 +128,64 @@ public class crud {
         }
         return true;
     }
+    public void changeEmail(String newEmail){
+        try{
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE users SET email = '"+newEmail+"' WHERE id = '"+userId+"'";
+            statement.executeUpdate(sql);
+        } catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void changePassword(String newPassword){
+        try{
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE users SET `password` = '"+encryptPassword(newPassword)+"' WHERE id = "+userId+"";
+            statement.executeUpdate(sql);
+        } catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    private boolean checkIfAdmin(){
+        try{
+            Statement statementEmail = connect.createStatement();
+            ResultSet resultSetCheckRole;
+            resultSetCheckRole = statementEmail.executeQuery("SELECT role FROM users WHERE email ='" + userEmail + "'");
+            if (resultSetCheckRole.next()) {
+                if (!resultSetCheckRole.getString("role").equals("admin")) {
+                    return false;
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return true;
+    }
+    public void changePasswordFromVisitor(String visitorEmail, String newVisitorPassword){
+        //A voir pour ne pas changer l'id pour le mail (plus simple, moins sécu)
+        try{
+            if (checkIfAdmin()){
+                Statement statement = connect.createStatement();
+                String sql = "UPDATE users SET password = '"+encryptPassword(newVisitorPassword)+"' WHERE email = '"+visitorEmail+"'";
+                statement.executeUpdate(sql);
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public boolean changeEmailFromVisitor(String visitorEmail, String newVisitorEmail){
+        try{
+            if(!checkIfAdmin()){
+                return false;
+            }
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE users SET email = '"+newVisitorEmail+"' WHERE email = '"+visitorEmail+"'";
+            statement.executeUpdate(sql);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return true;
+    }
 }
+
 
