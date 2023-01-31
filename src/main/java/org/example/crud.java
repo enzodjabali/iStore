@@ -5,17 +5,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import io.github.cdimascio.dotenv.Dotenv;
+
 public class crud {
     Connection connect;
     String userEmail ="";
+    Dotenv dotenv = Dotenv.configure().load();
 
     public void dbconnect() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect = DriverManager.getConnection(
-                    "jdbc:mysql://141.94.244.54:3306/istore",
-                    "istore", "bbY]NWQQHMBJR49W");
+                    String.format(dotenv.get("DATABASE_URL")),
+                    String.format(dotenv.get("DATABASE_USER")),
+                    String.format(dotenv.get("DATABASE_PASSWORD"))
+            );
         } catch (Exception exception) {
             System.out.println(exception);
         }
