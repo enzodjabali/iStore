@@ -45,15 +45,10 @@ public class admin extends crud{
         return true;
     }
     public void deleteEmployee(String email){
-        try {
-            Statement statement;
-            statement = connect.createStatement();
-            ResultSet resultSet;
-            resultSet = statement.executeQuery("SELECT * FROM users WHERE email ='"+emailToCheck+"' AND password ='"+encryptPassword(pwdToCheck)+"'");
-            if(resultSet.next()) {
-                userId = resultSet.getString("id");
-                userEmail = resultSet.getString("email");
-            }
+        try{
+            Statement statement = connect.createStatement();
+            String sql = "DELETE FROM users WHERE email = '"+email+"'";
+            statement.executeUpdate(sql);
         } catch (Exception e){
             System.out.println(e);
         }
