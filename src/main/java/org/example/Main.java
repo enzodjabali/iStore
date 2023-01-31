@@ -5,10 +5,13 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        crud crud = new crud();
+        admin crud = new admin();
         crud.dbconnect();
-        //crud.userRegister("enzo", "enzo@enzo.enzo", "pwd");
-        //crud.whiteListUser("titeux@gmail.com", "enzo@enzo.enzo");
+//        crud.userRegister("gabriel", "gabriel@gmail.com", "gabriel");
+        if(crud.userConnect("testlol@gmail.com", "hello")){
+        } else {
+            System.out.println("Ce compte n'existe pas");
+        }
     }
 }
 
