@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.concurrent.ExecutionException;
-
 public class crud {
     Connection connect;
 
@@ -15,8 +13,8 @@ public class crud {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/istore",
-                    "2java", "2java");
+                    "jdbc:mysql://141.94.244.54:3306/istore",
+                    "istore", "bbY]NWQQHMBJR49W");
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -27,9 +25,7 @@ public class crud {
         } catch (Exception e){
             System.out.println(e);
         }
-
     }
-
     public boolean userConnect(String emailToCheck, String pwdToCheck) {
         // Voir pour récupérer Role et Pseudo de la requete
         try {
@@ -107,9 +103,8 @@ public class crud {
             }
             Statement statement = connect.createStatement();
             ResultSet resultSet;
-            String sql = "INSERT INTO users (role) VALUES ('true') WHERE email = '"+userEmailToWhiteList+"'";
+            String sql = "UPDATE users SET whitelisted = 1 WHERE email = '"+userEmailToWhiteList+"'";
             statement.executeUpdate(sql);
-
 
         } catch (Exception e){
             System.out.println(e);
