@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 public class crud {
     Connection connect;
+    String userEmail ="";
 
     public void dbconnect() {
         Connection connection = null;
@@ -45,11 +46,15 @@ public class crud {
                 counter++;
                 email = resultSet.getString("email");
                 password = resultSet.getString("password");
-                System.out.println(counter);
             }
             resultSet.close();
             statement.close();
-            return (emailToCheck).equals(email) && passwordToCheck.equals(password);
+            if ((emailToCheck).equals(email) && passwordToCheck.equals(password)){
+                userEmail = emailToCheck;
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception exception){
             System.out.println(exception);
         }
@@ -66,7 +71,6 @@ public class crud {
             int counter = 0;
             while(resultSetEmail.next()){
                 counter++;
-                System.out.println(counter);
             }
             if(counter>0){
                 System.out.println("email already in use");
@@ -87,30 +91,47 @@ public class crud {
         }
         return false;
     }
-    public boolean whiteListUser(String email, String userEmailToWhiteList){
+    public boolean whiteListUser(String userEmailToWhiteList){
         try{
             Statement statementEmail = connect.createStatement();
             ResultSet resultSetCheckRole;
 
-            resultSetCheckRole = statementEmail.executeQuery("SELECT role FROM users WHERE email ='"+email+"'");
+            resultSetCheckRole = statementEmail.executeQuery("SELECT role FROM users WHERE email ='"+userEmail+"'");
             while(resultSetCheckRole.next()){
-                if(resultSetCheckRole.getString("role").equals("admin")){
-                    System.out.println("found user");
-                    continue;
-                } else {
+                //Vérifie si la requête vient d'un admin
+                if(!resultSetCheckRole.getString("role").equals("admin")){
                     return false;
                 }
             }
             Statement statement = connect.createStatement();
-            ResultSet resultSet;
             String sql = "UPDATE users SET whitelisted = 1 WHERE email = '"+userEmailToWhiteList+"'";
             statement.executeUpdate(sql);
 
         } catch (Exception e){
             System.out.println(e);
-
         }
     return true;
+    }
+    public boolean setAdmin(String userToSetAdmin) {
+        try {
+            Statement statementEmail = connect.createStatement();
+            ResultSet resultSetCheckRole;
+
+            resultSetCheckRole = statementEmail.executeQuery("SELECT role FROM users WHERE email ='" + userEmail + "'");
+            while (resultSetCheckRole.next()) {
+                //Vérifie si la requête vient d'un admin
+                if (!resultSetCheckRole.getString("role").equals("admin")) {
+                    return false;
+                }
+            }
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE users SET role = 'admin' WHERE email = '" + userToSetAdmin + "'";
+            statement.executeUpdate(sql);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return true;
     }
 }
 
