@@ -1,4 +1,4 @@
-package org.example;
+package org.istore;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
