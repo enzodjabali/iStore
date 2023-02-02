@@ -80,7 +80,9 @@ public class GUI {
                         System.out.println(passwordField.getText());
 
                         User crud = new User();
-                        crud.dbconnect();
+
+                        DBManager database = new DBManager();
+                        database.dbconnect();
 
                         boolean connect = crud.userConnect(emailField.getText(), passwordField.getText());
                         System.out.println(connect);

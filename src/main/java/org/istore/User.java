@@ -2,37 +2,15 @@ package org.istore;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class User {
-    Connection connect;
+    DBManager database = new DBManager();
+    Connection connect = database.dbconnect();
     String userEmail;
     String userId;
-    Dotenv dotenv = Dotenv.configure().load();
 
-    public void dbconnect() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connect = DriverManager.getConnection(
-                    String.format(dotenv.get("DATABASE_URL")),
-                    String.format(dotenv.get("DATABASE_USER")),
-                    String.format(dotenv.get("DATABASE_PASSWORD"))
-            );
-        } catch (Exception exception) {
-            System.out.println(exception);
-        }
-    }
-    public void dbdisconnect(){
-        try{
-            connect.close();
-        } catch (Exception e){
-            System.out.println(e);
-        }
-    }
     public boolean userConnect(String emailToCheck, String pwdToCheck) {
         if (emailToCheck.isEmpty() || pwdToCheck.isEmpty()) {
             return false;
