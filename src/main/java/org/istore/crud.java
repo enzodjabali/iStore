@@ -1,4 +1,4 @@
-package org.example;
+package org.istore;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Connection;
@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import io.github.cdimascio.dotenv.Dotenv;
+
 public class crud {
     Connection connect;
     String userEmail;
@@ -33,6 +34,10 @@ public class crud {
         }
     }
     public boolean userConnect(String emailToCheck, String pwdToCheck) {
+        if (emailToCheck.isEmpty() || pwdToCheck.isEmpty()) {
+            return false;
+        }
+
         // Voir pour récupérer Role et Pseudo de la requete
         try {
             Statement statement;

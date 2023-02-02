@@ -1,5 +1,4 @@
-package org.example;
-import java.sql.ResultSet;
+package org.istore;
 import java.sql.Statement;
 public class admin extends crud{
     public void changePasswordFromVisitor(String visitorEmail, String newVisitorPassword){
