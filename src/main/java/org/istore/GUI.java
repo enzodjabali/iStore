@@ -12,12 +12,6 @@ public class GUI {
     JFrame authFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Authentication");
     JFrame homeFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Home");
 
-
-    public static void main(String[] args) {
-        GUI signIn = new GUI();
-        signIn.authentication();
-    }
-
     public void authentication() {
         EventQueue.invokeLater(new Runnable() {
             @Override
