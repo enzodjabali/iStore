@@ -85,7 +85,7 @@ public class GUI {
                         System.out.println(emailField.getText());
                         System.out.println(passwordField.getText());
 
-                        crud crud = new crud();
+                        User crud = new User();
                         crud.dbconnect();
 
                         boolean connect = crud.userConnect(emailField.getText(), passwordField.getText());

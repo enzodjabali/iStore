@@ -1,6 +1,6 @@
 package org.istore;
 import java.sql.Statement;
-public class admin extends crud{
+public class Admin extends User {
     public void changePasswordFromVisitor(String visitorEmail, String newVisitorPassword){
         //A voir pour ne pas changer l'id pour le mail (plus simple, moins sécu)
         try{

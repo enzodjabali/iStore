@@ -3,7 +3,7 @@ package org.istore;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class manageStore extends admin {
+public class StoreManagement extends Admin {
     public void createStore(String storeName){
         try{
             Statement statement = connect.createStatement();

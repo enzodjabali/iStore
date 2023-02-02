@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import io.github.cdimascio.dotenv.Dotenv;
 
-public class crud {
+public class User {
     Connection connect;
     String userEmail;
     String userId;
