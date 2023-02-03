@@ -113,8 +113,10 @@ public class GUI {
         public class Home extends JPanel {
 
             public Home() {
-                // home page here
-                System.out.println("HOME PAGE DISPLAY");
+                // home page here with store listing
+                Listing allStores = new Listing();
+                allStores.getStoreList();
+
             }
         }
 
