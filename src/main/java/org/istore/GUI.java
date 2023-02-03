@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import io.github.cdimascio.dotenv.Dotenv;
+import java.util.ArrayList;
 
 public class GUI {
     Dotenv dotenv = Dotenv.configure().load();
@@ -115,7 +115,13 @@ public class GUI {
             public Home() {
                 // home page here with store listing
                 Listing allStores = new Listing();
-                allStores.getStoreList();
+                ArrayList<ArrayList<String>> storeList = allStores.getStoreList();
+
+                for (int i = 0; i < storeList.size(); i++) {
+                    System.out.println(storeList.get(i).get(0));
+                    System.out.println(storeList.get(i).get(1));
+                }
+
 
             }
         }
