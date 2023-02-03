@@ -14,7 +14,7 @@ import java.util.Objects;
 public class GUI {
     Dotenv dotenv = Dotenv.configure().load();
     JFrame authFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Authentication");
-    JFrame homeFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Home");
+    JFrame homeFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - List of stores");
 
     public void authentication() {
         EventQueue.invokeLater(new Runnable() {
@@ -116,11 +116,28 @@ public class GUI {
 
         public class Home extends JPanel {
             public Home() {
+                //Creating the MenuBar and adding components
+                JMenuBar mb = new JMenuBar();
+                JMenu menuStore = new JMenu("Stores");
+                JMenu menuUsers = new JMenu("Users");
+                mb.add(menuStore);
+                mb.add(menuUsers);
+                JMenuItem menuAccessStore = new JMenuItem("Access a store");
+                JMenuItem menuAddStore = new JMenuItem("Add a store");
+                JMenuItem menuEditStore = new JMenuItem("Edit a store");
+                JMenuItem menuDeleteStore = new JMenuItem("Delete a store");
+                menuStore.add(menuAccessStore);
+                menuStore.add(menuAddStore);
+                menuStore.add(menuEditStore);
+                menuStore.add(menuDeleteStore);
+
+                homeFrame.getContentPane().add(BorderLayout.NORTH, mb);
+
+
                 // home page here with store listing
                 Listing allStores = new Listing();
                 ArrayList<ArrayList<String>> storeList = allStores.getStoreList();
 
-                homeFrame.setLocationRelativeTo(null);
                 String header[] = {"ID","Name"};
 
                 String[][] data = new String[storeList.size()][2];
