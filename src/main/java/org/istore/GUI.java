@@ -4,8 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import io.github.cdimascio.dotenv.Dotenv;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class GUI {
     Dotenv dotenv = Dotenv.configure().load();
@@ -111,11 +115,23 @@ public class GUI {
         }
 
         public class Home extends JPanel {
-
             public Home() {
                 // home page here with store listing
                 Listing allStores = new Listing();
-                allStores.getStoreList();
+                ArrayList<ArrayList<String>> storeList = allStores.getStoreList();
+
+                homeFrame.setLocationRelativeTo(null);
+                String header[] = {"ID","Name"};
+
+                String[][] data = new String[storeList.size()][2];
+
+                for (int i = 0; i < storeList.size(); i++) {
+                    data[i] = new String[]{storeList.get(i).get(0), storeList.get(i).get(1)};
+                }
+
+                JTable table = new JTable(data, header);
+                homeFrame.getContentPane().add(new JScrollPane(table));
+                homeFrame.setVisible(true);
 
             }
         }
