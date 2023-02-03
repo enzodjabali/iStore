@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Listing {
@@ -13,8 +15,8 @@ public class Listing {
     DBManager database = new DBManager();
     Connection connect = database.dbconnect();
 
-    public void getStoreList() {
-
+    public ArrayList<ArrayList<String>> getStoreList() {
+        ArrayList<ArrayList<String>> items = new ArrayList<>();
         try {
             Statement statement;
             statement = connect.createStatement();
@@ -23,8 +25,10 @@ public class Listing {
 
             //Extact result from ResultSet rs
             while (resultSet.next()) {
-                System.out.println(resultSet.getString("id"));
-                System.out.println(resultSet.getString("name"));
+                ArrayList<String> item = new ArrayList<>();
+                item.add(resultSet.getString("id"));
+                item.add(resultSet.getString("name"));
+                items.add(item);
             }
             // close ResultSet rs
             resultSet.close();
@@ -33,6 +37,7 @@ public class Listing {
             System.out.println(e);
         }
         //return false;
+        return items;
     }
 
 }
