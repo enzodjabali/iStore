@@ -1,16 +1,44 @@
 package org.istore;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class StoreManager extends Admin {
+    DBManager database = new DBManager();
+    Connection connect = database.dbconnect();
     public void createStore(String storeName){
         try{
             Statement statement = connect.createStatement();
-            ResultSet resultSet;
             String sql = "INSERT INTO stores (name) VALUES ('"+storeName+"')";
             statement.executeUpdate(sql);
         } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void deleteStore(String storeId){
+        try{
+            Statement statement = connect.createStatement();
+            String sql = "DELETE FROM inventories WHERE id_store = ('"+storeId+"')";
+            statement.executeUpdate(sql);
+
+            Statement statementDelStoresAccess = connect.createStatement();
+            String sqlDelStoreAccess = "DELETE FROM stores_access WHERE id_store = ('"+storeId+"')";
+            statementDelStoresAccess.executeUpdate(sqlDelStoreAccess);
+
+            Statement statementDel = connect.createStatement();
+            String sqlDel = "DELETE FROM stores WHERE id = ('"+storeId+"')";
+            statementDel.executeUpdate(sqlDel);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void renameStore(String newName, String storeId){
+        try{
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE stores SET name = '"+newName+"' WHERE id = '"+storeId+"'";
+            statement.executeUpdate(sql);
+        } catch(Exception e){
             System.out.println(e);
         }
     }
