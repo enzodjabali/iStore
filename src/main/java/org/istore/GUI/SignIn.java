@@ -1,12 +1,9 @@
 package org.istore.GUI;
 
-
-
-import io.github.cdimascio.dotenv.Dotenv;
 import org.istore.DBManager;
-
 import org.istore.User;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

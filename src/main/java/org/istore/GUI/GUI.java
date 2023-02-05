@@ -2,18 +2,7 @@ package org.istore.GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import io.github.cdimascio.dotenv.Dotenv;
-
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-
-import static java.lang.Integer.parseInt;
-
-import io.github.cdimascio.dotenv.Dotenv;
-import org.istore.Listing;
-
 
 public class GUI {
     Dotenv dotenv = Dotenv.configure().load();

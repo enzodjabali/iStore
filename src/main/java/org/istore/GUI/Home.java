@@ -1,6 +1,5 @@
 package org.istore.GUI;
 
-
 import org.istore.Listing;
 
 import javax.swing.*;
