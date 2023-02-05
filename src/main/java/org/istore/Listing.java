@@ -1,14 +1,9 @@
 package org.istore;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class Listing {
 
@@ -37,6 +32,35 @@ public class Listing {
             System.out.println(e);
         }
         //return false;
+        return items;
+    }
+
+    public ArrayList<ArrayList<String>> getStoreItems(int storeId) {
+        ArrayList<ArrayList<String>> items = new ArrayList<>();
+        try {
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT items.id, items.name, items.price, stores.name\n" +
+                    "FROM stores\n" +
+                    "INNER JOIN inventories ON stores.id = inventories.id_store\n" +
+                    "INNER JOIN items ON inventories.id_item = items.id\n" +
+                    "WHERE stores.id = "+ storeId +"\n" +
+                    "ORDER BY items.id;");
+
+            while (resultSet.next()) {
+                ArrayList<String> item = new ArrayList<>();
+                item.add(resultSet.getString("items.id"));
+                item.add(resultSet.getString("items.name"));
+                item.add(resultSet.getString("items.price"));
+                item.add(resultSet.getString("stores.name"));
+                items.add(item);
+            }
+            resultSet.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return items;
     }
 
