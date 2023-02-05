@@ -58,7 +58,7 @@ public class User {
                 counter++;
             }
             if(counter>0){
-                System.out.println("email already use");
+                System.out.println("email already used");
                 return false;
             }
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -76,24 +76,41 @@ public class User {
         }
         return false;
     }
-    public void changeEmail(String newEmail){
+
+    public boolean userUpdate(String userId, String newPseudo, String newEmail, String newPassword){
         try{
+            Statement statementEmail;
+            statementEmail = connect.createStatement();
+            ResultSet resultSetEmail;
+
+            resultSetEmail = statementEmail.executeQuery("SELECT email FROM users WHERE email ='" + newEmail + "'");
+            int counter = 0;
+            while(resultSetEmail.next()){
+                counter++;
+            }
+            if(counter>0){
+                System.out.println("email already used");
+                return false;
+            }
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(newPassword.getBytes(StandardCharsets.UTF_8));
+            String cryptedNewPassword = new String(hash, StandardCharsets.UTF_8);
+
             Statement statement = connect.createStatement();
-            String sql = "UPDATE users SET email = '"+newEmail+"' WHERE id = '"+userId+"'";
+            String sql = "UPDATE users\n" +
+                    "SET pseudo = '" + newPseudo + "',\n" +
+                    " email = '" + newEmail + "',\n" +
+                    " password = '" + cryptedNewPassword + "'\n" +
+                    " WHERE id = " + userId + "";
             statement.executeUpdate(sql);
-        } catch(Exception e){
+
+            return true;
+        } catch (Exception e){
             System.out.println(e);
         }
+        return false;
     }
-    public void changePassword(String newPassword){
-        try{
-            Statement statement = connect.createStatement();
-            String sql = "UPDATE users SET `password` = '"+encryptPassword(newPassword)+"' WHERE id = "+userId+"";
-            statement.executeUpdate(sql);
-        } catch(Exception e){
-            System.out.println(e);
-        }
-    }
+
     public boolean whitelistUser(String whitelist, String userToWhitelist){
         try{
             Statement statement = connect.createStatement();
@@ -105,22 +122,4 @@ public class User {
         }
         return false;
     }
-    public void getInfosFromUsers(){
-        try {
-            Statement statement;
-            statement = connect.createStatement();
-            ResultSet resultSet;
-            resultSet = statement.executeQuery("SELECT pseudo, email, role FROM users");
-            while(resultSet.next()) {
-                //Afficher ici
-                String pseudo = resultSet.getString("pseudo");
-                String email = resultSet.getString("email");
-                String role = resultSet.getString("role");
-            }
-        } catch (Exception e){
-            System.out.println(e);
-        }
-    }
 }
-
-

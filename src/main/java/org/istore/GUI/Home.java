@@ -124,5 +124,13 @@ public class Home extends JPanel {
             }
         });
 
+        menuEditUser.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuEditUser) {
+                    new EditUser();
+                }
+            }
+        });
+
     }
 }
