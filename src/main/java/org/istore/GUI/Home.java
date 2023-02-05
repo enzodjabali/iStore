@@ -25,16 +25,27 @@ public class Home extends JPanel {
         JMenuBar mb = new JMenuBar();
         JMenu menuStore = new JMenu("Stores");
         JMenu menuUsers = new JMenu("Users");
+
         mb.add(menuStore);
         mb.add(menuUsers);
+
         JMenuItem menuAccessStore = new JMenuItem("Access a store");
-        JMenuItem menuAddStore = new JMenuItem("Add a store");
+        JMenuItem menuAddStore = new JMenuItem("Create a store");
         JMenuItem menuEditStore = new JMenuItem("Edit a store");
         JMenuItem menuDeleteStore = new JMenuItem("Delete a store");
         menuStore.add(menuAccessStore);
         menuStore.add(menuAddStore);
         menuStore.add(menuEditStore);
         menuStore.add(menuDeleteStore);
+
+        JMenuItem menuUserList = new JMenuItem("List of users");
+        JMenuItem menuAddUser = new JMenuItem("Create a user");
+        JMenuItem menuEditUser = new JMenuItem("Edit a user");
+        JMenuItem menuDeleteUser = new JMenuItem("Delete a store");
+        menuUsers.add(menuUserList);
+        menuUsers.add(menuAddUser);
+        menuUsers.add(menuEditUser);
+        menuUsers.add(menuDeleteUser);
 
         homeFrame.getContentPane().add(BorderLayout.NORTH, mb);
 
