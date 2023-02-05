@@ -8,10 +8,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import org.istore.StoreManager;
+import org.istore.User;
+
 import static org.istore.GUI.GUI.isNumeric;
 
 public class EditStore extends JPanel {
-    public EditStore(JFrame homeFrame) {
+    public EditStore(JFrame homeFrame, User myUser) {
         Dotenv dotenv = Dotenv.configure().load();
 
         JFrame editStoreFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Edit a store");
@@ -63,7 +65,7 @@ public class EditStore extends JPanel {
                             if (new StoreManager().renameStore(newNameField.getText(), storeId)) {
                                 editStoreFrame.dispatchEvent(new WindowEvent(editStoreFrame, WindowEvent.WINDOW_CLOSING));
                                 homeFrame.dispose();
-                                new Home();
+                                new Home(myUser);
                             }
                         } else {
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>The store's name can't be empty!</b></html>");

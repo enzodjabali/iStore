@@ -3,6 +3,8 @@ package org.istore.GUI;
 import org.istore.Listing;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.istore.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Home extends JPanel {
-    public Home() {
+    public Home(User myUser) {
         Dotenv dotenv = Dotenv.configure().load();
 
         JFrame homeFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - List of stores");
@@ -25,9 +27,11 @@ public class Home extends JPanel {
         JMenuBar mb = new JMenuBar();
         JMenu menuStore = new JMenu("Stores");
         JMenu menuUsers = new JMenu("Users");
+        JMenu menuMyAccount = new JMenu("My Account - " + myUser.getPseudo());
 
         mb.add(menuStore);
         mb.add(menuUsers);
+        mb.add(menuMyAccount);
 
         JMenuItem menuAccessStore = new JMenuItem("Access a store");
         JMenuItem menuAddStore = new JMenuItem("Create a store");
@@ -50,6 +54,11 @@ public class Home extends JPanel {
         menuUsers.add(menuEditUser);
         menuUsers.add(menuEditUserRole);
         menuUsers.add(menuDeleteUser);
+
+        JMenuItem menuEditMyAccount = new JMenuItem("Edit my informations");
+        JMenuItem menuDeleteMyAccount = new JMenuItem("Delete my account");
+        menuMyAccount.add(menuEditMyAccount);
+        menuMyAccount.add(menuDeleteMyAccount);
 
         homeFrame.getContentPane().add(BorderLayout.NORTH, mb);
 
@@ -81,7 +90,7 @@ public class Home extends JPanel {
         menuAddStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuAddStore) {
-                    new AddStore(homeFrame);
+                    new AddStore(homeFrame, myUser);
                 }
             }
         });
@@ -89,7 +98,7 @@ public class Home extends JPanel {
         menuEditStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuEditStore) {
-                    new EditStore(homeFrame);
+                    new EditStore(homeFrame, myUser);
                 }
             }
         });
@@ -97,7 +106,7 @@ public class Home extends JPanel {
         menuDeleteStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuDeleteStore) {
-                    new DeleteStore(homeFrame);
+                    new DeleteStore(homeFrame, myUser);
                 }
             }
         });

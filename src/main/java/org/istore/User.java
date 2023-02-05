@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class User {
@@ -11,6 +12,26 @@ public class User {
     Connection connect = database.dbconnect();
     String userEmail;
     String userId;
+
+    public String getId() {
+        return userId;
+    }
+
+    public String getPseudo() {
+        try {
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT pseudo FROM users WHERE id = " + userId);
+            if(resultSet.next()) {
+                return resultSet.getString("pseudo");
+            }
+            return null;
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public boolean userConnect(String emailToCheck, String pwdToCheck) {
         if (emailToCheck.isEmpty() || pwdToCheck.isEmpty()) {

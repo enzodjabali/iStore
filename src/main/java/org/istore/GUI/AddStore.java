@@ -2,6 +2,7 @@ package org.istore.GUI;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.istore.StoreManager;
+import org.istore.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 public class AddStore extends JPanel {
-    public AddStore(JFrame homeFrame) {
+    public AddStore(JFrame homeFrame, User myUser) {
         Dotenv dotenv = Dotenv.configure().load();
 
         JFrame addStoreFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Create a store");
@@ -48,7 +49,7 @@ public class AddStore extends JPanel {
                     if (new StoreManager().createStore(storeNameField.getText())) {
                         addStoreFrame.dispatchEvent(new WindowEvent(addStoreFrame, WindowEvent.WINDOW_CLOSING));
                         homeFrame.dispose();
-                        new Home();
+                        new Home(myUser);
                     }
                 }
             }

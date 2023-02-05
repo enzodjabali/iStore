@@ -8,10 +8,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import org.istore.StoreManager;
+import org.istore.User;
+
 import static org.istore.GUI.GUI.isNumeric;
 
 public class DeleteStore extends JPanel {
-    public DeleteStore(JFrame homeFrame) {
+    public DeleteStore(JFrame homeFrame, User myUser) {
         Dotenv dotenv = Dotenv.configure().load();
 
         JFrame deleteStoreFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Delete a store");
@@ -52,7 +54,7 @@ public class DeleteStore extends JPanel {
                         if (new StoreManager().deleteStore(storeId)) {
                             deleteStoreFrame.dispatchEvent(new WindowEvent(deleteStoreFrame, WindowEvent.WINDOW_CLOSING));
                             homeFrame.dispose();
-                            new Home();
+                            new Home(myUser);
                         }
                     } else {
                         gbc.gridy = 5;
