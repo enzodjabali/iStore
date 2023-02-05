@@ -94,6 +94,15 @@ public class User {
             System.out.println(e);
         }
     }
+    public void whitelistUser(String whitelist, String userToWhitelist){
+        try{
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE users SET whitelisted = '" + whitelist + "' WHERE id = '" + userToWhitelist + "'";
+            statement.executeUpdate(sql);
+        } catch(Exception e){
+            System.out.println(e);
+        }
+    }
     public void getInfosFromUsers(){
         try {
             Statement statement;
