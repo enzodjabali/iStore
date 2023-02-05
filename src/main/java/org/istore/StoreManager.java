@@ -7,14 +7,16 @@ import java.sql.Statement;
 public class StoreManager extends Admin {
     DBManager database = new DBManager();
     Connection connect = database.dbconnect();
-    public void createStore(String storeName){
+    public boolean createStore(String storeName){
         try{
             Statement statement = connect.createStatement();
             String sql = "INSERT INTO stores (name) VALUES ('"+storeName+"')";
             statement.executeUpdate(sql);
+            return true;
         } catch (Exception e){
             System.out.println(e);
         }
+        return false;
     }
     public void deleteStore(String storeId){
         try{

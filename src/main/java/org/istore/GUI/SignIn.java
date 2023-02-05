@@ -68,13 +68,7 @@ public class SignIn extends JPanel {
                         System.out.println("connected");
                         authFrame.setVisible(false);
 
-                        JFrame homeFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - List of stores");
-
-                        homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        homeFrame.setSize(800, 600);
-                        homeFrame.add(new Home(homeFrame));
-                        homeFrame.setLocationRelativeTo(null);
-                        homeFrame.setVisible(true);
+                        new Home();
                     } else {
                         System.out.println("not connected");
                         // print error message
