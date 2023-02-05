@@ -2,6 +2,7 @@ package org.istore.GUI;
 
 import org.istore.Listing;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Home extends JPanel {
-    public Home(JFrame homeFrame) {
+    public Home() {
+        Dotenv dotenv = Dotenv.configure().load();
+
+        JFrame homeFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - List of stores");
+        homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        homeFrame.setSize(800, 600);
+        //homeFrame.add(new Home(homeFrame));
+        homeFrame.setLocationRelativeTo(null);
+        homeFrame.setVisible(true);
+
         Listing listingQueries = new Listing();
 
         //Creating the MenuBar and adding components
@@ -50,6 +60,14 @@ public class Home extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuAccessStore) {
                     new AccessStore();
+                }
+            }
+        });
+
+        menuAddStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuAddStore) {
+                    new AddStore(homeFrame);
                 }
             }
         });
