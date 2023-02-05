@@ -40,9 +40,9 @@ public class Home extends JPanel {
 
         JMenuItem menuUserList = new JMenuItem("List of users");
         JMenuItem menuAddUser = new JMenuItem("Create a user");
-        JMenuItem menuWhitelistUser = new JMenuItem("Whitelist a user");
+        JMenuItem menuWhitelistUser = new JMenuItem("Whitelist/blacklist a user");
         JMenuItem menuEditUser = new JMenuItem("Edit a user");
-        JMenuItem menuDeleteUser = new JMenuItem("Delete a store");
+        JMenuItem menuDeleteUser = new JMenuItem("Delete a user");
         menuUsers.add(menuUserList);
         menuUsers.add(menuAddUser);
         menuUsers.add(menuWhitelistUser);
@@ -104,6 +104,14 @@ public class Home extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuUserList) {
                     new UserList();
+                }
+            }
+        });
+
+        menuAddUser.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuAddUser) {
+                    new SignUp();
                 }
             }
         });

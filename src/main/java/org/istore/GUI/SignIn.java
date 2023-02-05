@@ -78,5 +78,14 @@ public class SignIn extends JPanel {
                 }
             }
         });
+
+        signUpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // this makes sure the button you are pressing is the button variable
+                if (e.getSource() == signUpButton) {
+                    new SignUp();
+                }
+            }
+        });
     }
 }
