@@ -53,12 +53,12 @@ public class SignIn extends JPanel {
                     System.out.println(emailField.getText());
                     System.out.println(passwordField.getText());
 
-                    User crud = new User();
+                    User myUser = new User();
 
                     DBManager database = new DBManager();
                     database.dbconnect();
 
-                    boolean connect = crud.userConnect(emailField.getText(), passwordField.getText());
+                    boolean connect = myUser.userConnect(emailField.getText(), passwordField.getText());
                     System.out.println(connect);
 
                     if (connect) {
@@ -66,7 +66,7 @@ public class SignIn extends JPanel {
                         System.out.println("connected");
                         authFrame.setVisible(false);
 
-                        new Home();
+                        new Home(myUser);
                     } else {
                         System.out.println("not connected");
                         // print error message
