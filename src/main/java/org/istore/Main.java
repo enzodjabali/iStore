@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         GUI signIn = new GUI();
-        signIn.authentication();
+        signIn.Authentication();
     }
 }
 

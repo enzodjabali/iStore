@@ -29,7 +29,7 @@ public class GUI {
         return true;
     }
 
-    public void authentication() {
+    public void Authentication() {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
