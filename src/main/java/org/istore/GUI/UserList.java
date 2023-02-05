@@ -20,7 +20,7 @@ public class UserList extends JPanel {
 
         ArrayList<ArrayList<String>> userList = listingQueries.getUserList();
 
-        String header[] = {"ID", "Email", "Name", "Pseudo", "Whitelisted"};
+        String header[] = {"ID", "Email", "Pseudo", "Role", "Whitelisted"};
 
         String[][] data = new String[userList.size()][2];
 
