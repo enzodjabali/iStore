@@ -42,11 +42,13 @@ public class Home extends JPanel {
         JMenuItem menuAddUser = new JMenuItem("Create a user");
         JMenuItem menuWhitelistUser = new JMenuItem("Whitelist/blacklist a user");
         JMenuItem menuEditUser = new JMenuItem("Edit a user");
+        JMenuItem menuEditUserRole = new JMenuItem("Edit a user role");
         JMenuItem menuDeleteUser = new JMenuItem("Delete a user");
         menuUsers.add(menuUserList);
         menuUsers.add(menuAddUser);
         menuUsers.add(menuWhitelistUser);
         menuUsers.add(menuEditUser);
+        menuUsers.add(menuEditUserRole);
         menuUsers.add(menuDeleteUser);
 
         homeFrame.getContentPane().add(BorderLayout.NORTH, mb);
@@ -128,6 +130,14 @@ public class Home extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuEditUser) {
                     new EditUser();
+                }
+            }
+        });
+
+        menuEditUserRole.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuEditUserRole) {
+                    new EditUserRole();
                 }
             }
         });

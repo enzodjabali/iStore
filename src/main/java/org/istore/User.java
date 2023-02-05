@@ -122,4 +122,16 @@ public class User {
         }
         return false;
     }
+
+    public boolean updateRole(String userId, String newRole){
+        try{
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE users SET `role` = '" + newRole + "' WHERE id = " + userId + "";
+            statement.executeUpdate(sql);
+            return true;
+        } catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
 }
