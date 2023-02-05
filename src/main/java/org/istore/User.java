@@ -134,4 +134,16 @@ public class User {
         }
         return false;
     }
+
+    public boolean deleteUser(String userId){
+        try {
+            Statement statement = connect.createStatement();
+            String sql = "DELETE FROM users WHERE id = '" + userId + "'";
+            statement.executeUpdate(sql);
+            return true;
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
 }
