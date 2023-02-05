@@ -18,7 +18,7 @@ public class StoreManager extends Admin {
         }
         return false;
     }
-    public void deleteStore(String storeId){
+    public boolean deleteStore(String storeId){
         try{
             Statement statement = connect.createStatement();
             String sql = "DELETE FROM inventories WHERE id_store = ('"+storeId+"')";
@@ -31,9 +31,11 @@ public class StoreManager extends Admin {
             Statement statementDel = connect.createStatement();
             String sqlDel = "DELETE FROM stores WHERE id = ('"+storeId+"')";
             statementDel.executeUpdate(sqlDel);
+            return true;
         } catch (Exception e){
             System.out.println(e);
         }
+        return false;
     }
     public void renameStore(String newName, String storeId){
         try{

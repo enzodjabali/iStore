@@ -16,7 +16,6 @@ public class Home extends JPanel {
         JFrame homeFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - List of stores");
         homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         homeFrame.setSize(800, 600);
-        //homeFrame.add(new Home(homeFrame));
         homeFrame.setLocationRelativeTo(null);
         homeFrame.setVisible(true);
 
@@ -68,6 +67,14 @@ public class Home extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuAddStore) {
                     new AddStore(homeFrame);
+                }
+            }
+        });
+
+        menuDeleteStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuDeleteStore) {
+                    new DeleteStore(homeFrame);
                 }
             }
         });
