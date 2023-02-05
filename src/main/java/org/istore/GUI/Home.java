@@ -159,6 +159,14 @@ public class Home extends JPanel {
             }
         });
 
+        menuEditMyAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuEditMyAccount) {
+                    new EditMyAccount(homeFrame, myUser);
+                }
+            }
+        });
+
         menuDeleteMyAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuDeleteMyAccount) {
