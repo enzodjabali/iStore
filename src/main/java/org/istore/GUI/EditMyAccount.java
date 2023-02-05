@@ -13,7 +13,7 @@ public class EditMyAccount extends JPanel {
     public EditMyAccount(JFrame homeFrame, User myUser) {
         Dotenv dotenv = Dotenv.configure().load();
 
-        JFrame editMyAccountFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Edit my informations");
+        JFrame editMyAccountFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Edit my account");
         editMyAccountFrame.setSize(350, 200);
         editMyAccountFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         editMyAccountFrame.setLocationRelativeTo(null);
@@ -39,7 +39,7 @@ public class EditMyAccount extends JPanel {
 
         gbc.gridy = 0;
         gbc.gridx = 1;
-        editMyAccountFrame.add(new JLabel("<html><h4>Edit a user</h4></html>"), gbc);
+        editMyAccountFrame.add(new JLabel("<html><h4>Edit my account: " + myUser.getPseudo() + "</h4></html>"), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;

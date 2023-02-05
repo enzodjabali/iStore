@@ -55,7 +55,7 @@ public class Home extends JPanel {
         menuUsers.add(menuEditUserRole);
         menuUsers.add(menuDeleteUser);
 
-        JMenuItem menuEditMyAccount = new JMenuItem("Edit my informations");
+        JMenuItem menuEditMyAccount = new JMenuItem("Edit my account");
         JMenuItem menuDeleteMyAccount = new JMenuItem("Delete my account");
         menuMyAccount.add(menuEditMyAccount);
         menuMyAccount.add(menuDeleteMyAccount);
