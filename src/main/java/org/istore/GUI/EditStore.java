@@ -57,7 +57,6 @@ public class EditStore extends JPanel {
 
                     gbc.gridy = 5;
                     gbc.gridx = 1;
-                    JLabel errorMessage = new JLabel("");
 
                     if (isNumeric(storeId)) {
                         if (!newNameField.getText().isEmpty()) {
@@ -67,14 +66,15 @@ public class EditStore extends JPanel {
                                 new Home();
                             }
                         } else {
-                            errorMessage = new JLabel("<html><b style='color: red;'>The store's name can't be empty!</b></html>");
+                            JLabel errorMessage = new JLabel("<html><b style='color: red;'>The store's name can't be empty!</b></html>");
+                            editStoreFrame.add(errorMessage, gbc);
+                            editStoreFrame.setVisible(true);
                         }
                     } else {
-                        errorMessage = new JLabel("<html><b style='color: red;'>Please, enter a number!</b></html>");
+                        JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, enter a number!</b></html>");
+                        editStoreFrame.add(errorMessage, gbc);
+                        editStoreFrame.setVisible(true);
                     }
-
-                    editStoreFrame.add(errorMessage, gbc);
-                    editStoreFrame.setVisible(true);
                 }
             }
         });
