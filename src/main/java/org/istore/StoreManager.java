@@ -37,14 +37,16 @@ public class StoreManager extends Admin {
         }
         return false;
     }
-    public void renameStore(String newName, String storeId){
+    public boolean renameStore(String newName, String storeId){
         try{
             Statement statement = connect.createStatement();
             String sql = "UPDATE stores SET name = '"+newName+"' WHERE id = '"+storeId+"'";
             statement.executeUpdate(sql);
+            return true;
         } catch(Exception e){
             System.out.println(e);
         }
+        return false;
     }
     public void createItem(String itemName){
         try{

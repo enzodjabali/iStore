@@ -71,6 +71,14 @@ public class Home extends JPanel {
             }
         });
 
+        menuEditStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuEditStore) {
+                    new EditStore(homeFrame);
+                }
+            }
+        });
+
         menuDeleteStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuDeleteStore) {

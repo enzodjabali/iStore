@@ -12,8 +12,6 @@ import java.awt.event.ActionListener;
 public class SignIn extends JPanel {
 
     public SignIn(JFrame authFrame) {
-        Dotenv dotenv = Dotenv.configure().load();
-
         JTextField emailField = new JTextField(20);
         JTextField passwordField = new JPasswordField(20);
         JButton signInButton = new JButton("Sign in");
