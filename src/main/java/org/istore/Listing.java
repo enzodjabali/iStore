@@ -64,4 +64,32 @@ public class Listing {
         return items;
     }
 
+    public ArrayList<ArrayList<String>> getUserList() {
+        ArrayList<ArrayList<String>> items = new ArrayList<>();
+        try {
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT * FROM users");
+
+            //Extact result from ResultSet rs
+            while (resultSet.next()) {
+                ArrayList<String> item = new ArrayList<>();
+                item.add(resultSet.getString("id"));
+                item.add(resultSet.getString("email"));
+                item.add(resultSet.getString("pseudo"));
+                item.add(resultSet.getString("role"));
+                item.add(resultSet.getString("whitelisted"));
+                items.add(item);
+            }
+            // close ResultSet rs
+            resultSet.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        //return false;
+        return items;
+    }
+
 }
