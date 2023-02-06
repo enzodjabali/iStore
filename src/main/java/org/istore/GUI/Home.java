@@ -27,10 +27,12 @@ public class Home extends JPanel {
         JMenuBar mb = new JMenuBar();
         JMenu menuStore = new JMenu("Stores");
         JMenu menuUsers = new JMenu("Users");
+        JMenu menuInventories = new JMenu("Inventories");
         JMenu menuMyAccount = new JMenu("My Account - " + myUser.getPseudo());
 
         mb.add(menuStore);
         mb.add(menuUsers);
+        mb.add(menuInventories);
         mb.add(menuMyAccount);
 
         JMenuItem menuAccessStore = new JMenuItem("Access a store");
@@ -54,6 +56,17 @@ public class Home extends JPanel {
         menuUsers.add(menuEditUser);
         menuUsers.add(menuEditUserRole);
         menuUsers.add(menuDeleteUser);
+
+        JMenuItem menuItemList = new JMenuItem("List of items");
+        JMenuItem menuAddItem = new JMenuItem("Create an item");
+        JMenuItem menuDeleteItem = new JMenuItem("Delete an item");
+        JMenuItem menuAddItemToStore = new JMenuItem("Add an item to a store");
+        JMenuItem menuRemoveItemFromStore = new JMenuItem("Remove an item from a store");
+        menuInventories.add(menuItemList);
+        menuInventories.add(menuAddItem);
+        menuInventories.add(menuDeleteItem);
+        menuInventories.add(menuAddItemToStore);
+        menuInventories.add(menuRemoveItemFromStore);
 
         JMenuItem menuEditMyAccount = new JMenuItem("Edit my account");
         JMenuItem menuDeleteMyAccount = new JMenuItem("Delete my account");
@@ -155,6 +168,30 @@ public class Home extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuDeleteUser) {
                     new DeleteUser();
+                }
+            }
+        });
+
+        menuItemList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuItemList) {
+                    new ItemList();
+                }
+            }
+        });
+
+        menuAddItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuAddItem) {
+                    new AddItem();
+                }
+            }
+        });
+
+        menuDeleteItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuDeleteItem) {
+                    new DeleteItem();
                 }
             }
         });

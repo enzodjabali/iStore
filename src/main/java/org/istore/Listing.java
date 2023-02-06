@@ -92,4 +92,26 @@ public class Listing {
         return items;
     }
 
+    public ArrayList<ArrayList<String>> getItemList() {
+        ArrayList<ArrayList<String>> items = new ArrayList<>();
+        try {
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT * FROM items");
+
+            while (resultSet.next()) {
+                ArrayList<String> item = new ArrayList<>();
+                item.add(resultSet.getString("id"));
+                item.add(resultSet.getString("name"));
+                item.add(resultSet.getString("price"));
+                items.add(item);
+            }
+            resultSet.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return items;
+    }
 }
