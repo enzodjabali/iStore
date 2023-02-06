@@ -38,13 +38,16 @@ public class Home extends JPanel {
         mb.add(menuMyAccount);
 
         JMenuItem menuAccessStore = new JMenuItem("Access a store");
-        JMenuItem menuAddStore = new JMenuItem("Create a store");
-        JMenuItem menuEditStore = new JMenuItem("Edit a store");
-        JMenuItem menuDeleteStore = new JMenuItem("Delete a store");
         menuStore.add(menuAccessStore);
-        menuStore.add(menuAddStore);
-        menuStore.add(menuEditStore);
-        menuStore.add(menuDeleteStore);
+
+        if (myUser.isWhitelisted(myUser.getEmail())) {
+            JMenuItem menuAddStore = new JMenuItem("Create a store");
+            JMenuItem menuEditStore = new JMenuItem("Edit a store");
+            JMenuItem menuDeleteStore = new JMenuItem("Delete a store");
+            menuStore.add(menuAddStore);
+            menuStore.add(menuEditStore);
+            menuStore.add(menuDeleteStore);
+        }
 
         JMenuItem menuAddUserToStore = new JMenuItem("Add a user to a store");
         JMenuItem menuRemoveUserFromStore = new JMenuItem("Remove a user from a store");

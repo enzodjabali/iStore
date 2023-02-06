@@ -16,6 +16,9 @@ public class User {
     public String getId() {
         return userId;
     }
+    public String getEmail() {
+        return userEmail;
+    }
 
     public String getPseudo() {
         try {
