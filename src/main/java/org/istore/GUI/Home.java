@@ -25,17 +25,9 @@ public class Home extends JPanel {
 
         //Creating the MenuBar and adding components
         JMenuBar mb = new JMenuBar();
-        JMenu menuStore = new JMenu("Stores");
-        JMenu menuStoreAccess = new JMenu("Stores Access");
-        JMenu menuUsers = new JMenu("Users");
-        JMenu menuInventories = new JMenu("Inventories");
-        JMenu menuMyAccount = new JMenu("My Account - " + myUser.getPseudo());
 
+        JMenu menuStore = new JMenu("Stores");
         mb.add(menuStore);
-        mb.add(menuStoreAccess);
-        mb.add(menuUsers);
-        mb.add(menuInventories);
-        mb.add(menuMyAccount);
 
         JMenuItem menuAccessStore = new JMenuItem("Access a store");
         menuStore.add(menuAccessStore);
@@ -74,6 +66,9 @@ public class Home extends JPanel {
         }
 
         if (myUser.isAdmin(myUser.getId())) {
+            JMenu menuStoreAccess = new JMenu("Stores Access");
+            mb.add(menuStoreAccess);
+
             JMenuItem menuAddUserToStore = new JMenuItem("Add a user to a store");
             JMenuItem menuRemoveUserFromStore = new JMenuItem("Remove a user from a store");
             menuStoreAccess.add(menuAddUserToStore);
@@ -95,6 +90,9 @@ public class Home extends JPanel {
                 }
             });
         }
+
+        JMenu menuUsers = new JMenu("Users");
+        mb.add(menuUsers);
 
         JMenuItem menuUserList = new JMenuItem("List of users");
         menuUsers.add(menuUserList);
@@ -152,8 +150,10 @@ public class Home extends JPanel {
             });
         }
 
-
         if (myUser.isAdmin(myUser.getId())) {
+            JMenu menuInventories = new JMenu("Inventories");
+            mb.add(menuInventories);
+
             JMenuItem menuItemList = new JMenuItem("List of items");
             JMenuItem menuAddItem = new JMenuItem("Create an item");
             JMenuItem menuDeleteItem = new JMenuItem("Delete an item");
@@ -166,8 +166,6 @@ public class Home extends JPanel {
             menuInventories.add(menuEditItem);
             menuInventories.add(menuAddItemToStore);
             menuInventories.add(menuRemoveItemFromStore);
-
-
 
             menuItemList.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -217,6 +215,9 @@ public class Home extends JPanel {
                 }
             });
         }
+
+        JMenu menuMyAccount = new JMenu("My Account - " + myUser.getPseudo());
+        mb.add(menuMyAccount);
 
         JMenuItem menuEditMyAccount = new JMenuItem("Edit my account");
         JMenuItem menuDeleteMyAccount = new JMenuItem("Delete my account");
