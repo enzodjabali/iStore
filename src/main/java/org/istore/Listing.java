@@ -42,9 +42,23 @@ public class Listing {
         return items;
     }
 
-    public ArrayList<ArrayList<String>> getStoreItems(int storeId) {
+    public ArrayList<ArrayList<String>> getStoreItems(int storeId, String userId) {
         ArrayList<ArrayList<String>> items = new ArrayList<>();
         try {
+            Statement statementVerifyPrivileges;
+            statementVerifyPrivileges = connect.createStatement();
+            ResultSet resultSetVerifyPrivileges;
+            resultSetVerifyPrivileges = statementVerifyPrivileges.executeQuery("SELECT stores_access.id_store, stores_access.id_user \n" +
+                    "FROM stores_access\n" +
+                    "WHERE stores_access.id_store = "+storeId+"\n" +
+                    "AND stores_access.id_user = "+userId+"\n");
+
+            if (!resultSetVerifyPrivileges.next()) {
+                System.out.println("Nothing found");
+                return new ArrayList<>();
+            }
+            resultSetVerifyPrivileges.close();
+
             Statement statement;
             statement = connect.createStatement();
             ResultSet resultSet;

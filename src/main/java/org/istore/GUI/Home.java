@@ -283,7 +283,7 @@ public class Home extends JPanel {
         menuAccessStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuAccessStore) {
-                    new AccessStore();
+                    new AccessStore(myUser.getId());
                 }
             }
         });

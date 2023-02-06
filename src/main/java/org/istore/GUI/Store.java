@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Store extends JPanel {
 
-    public Store(int storeId) {
+    public Store(int storeId, String userId) {
         Dotenv dotenv = Dotenv.configure().load();
         Listing listingQueries = new Listing();
 
@@ -18,12 +18,11 @@ public class Store extends JPanel {
         storeFrame.setLocationRelativeTo(null);
         storeFrame.setVisible(true);
 
-        ArrayList<ArrayList<String>> storeList = listingQueries.getStoreItems(storeId);
+        ArrayList<ArrayList<String>> storeList = listingQueries.getStoreItems(storeId, userId);
 
         String header[] = {"ID", "Name", "Price", "Store"};
 
         String[][] data = new String[storeList.size()][2];
-
         for (int i = 0; i < storeList.size(); i++) {
             data[i] = new String[] {
                     storeList.get(i).get(0),
@@ -32,9 +31,14 @@ public class Store extends JPanel {
                     storeList.get(i).get(3)
             };
         }
-
-        JTable table = new JTable(data, header);
-        storeFrame.getContentPane().add(new JScrollPane(table));
-        storeFrame.setVisible(true);
+        if(storeList.size() == 0){
+            JLabel object = new JLabel("Ce store n'existe pas OU vous n'avez pas accès à celui-ci");
+            storeFrame.getContentPane().add(new JScrollPane(object));
+            storeFrame.setVisible(true);
+        } else {
+            JTable object = new JTable(data, header);
+            storeFrame.getContentPane().add(new JScrollPane(object));
+            storeFrame.setVisible(true);
+        }
     }
 }

@@ -11,7 +11,7 @@ import static java.lang.Integer.parseInt;
 import static org.istore.GUI.GUI.isNumeric;
 
 public class AccessStore extends JPanel {
-    public AccessStore() {
+    public AccessStore(String userId) {
         Dotenv dotenv = Dotenv.configure().load();
 
         JFrame accessStoreFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Access a store");
@@ -51,7 +51,7 @@ public class AccessStore extends JPanel {
                     if (isNumeric(storeId)) {
                         int storeIdInt = parseInt(storeId);
                         accessStoreFrame.dispatchEvent(new WindowEvent(accessStoreFrame, WindowEvent.WINDOW_CLOSING));
-                        new Store(storeIdInt);
+                        new Store(storeIdInt, userId);
                     } else {
                         gbc.gridy = 5;
                         gbc.gridx = 1;
