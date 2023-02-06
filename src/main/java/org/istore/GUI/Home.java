@@ -26,11 +26,13 @@ public class Home extends JPanel {
         //Creating the MenuBar and adding components
         JMenuBar mb = new JMenuBar();
         JMenu menuStore = new JMenu("Stores");
+        JMenu menuStoreAccess = new JMenu("Stores Access");
         JMenu menuUsers = new JMenu("Users");
         JMenu menuInventories = new JMenu("Inventories");
         JMenu menuMyAccount = new JMenu("My Account - " + myUser.getPseudo());
 
         mb.add(menuStore);
+        mb.add(menuStoreAccess);
         mb.add(menuUsers);
         mb.add(menuInventories);
         mb.add(menuMyAccount);
@@ -43,6 +45,11 @@ public class Home extends JPanel {
         menuStore.add(menuAddStore);
         menuStore.add(menuEditStore);
         menuStore.add(menuDeleteStore);
+
+        JMenuItem menuAddUserToStore = new JMenuItem("Add a user to a store");
+        JMenuItem menuRemoveUserFromStore = new JMenuItem("Remove a user from a store");
+        menuStoreAccess.add(menuAddUserToStore);
+        menuStoreAccess.add(menuRemoveUserFromStore);
 
         JMenuItem menuUserList = new JMenuItem("List of users");
         JMenuItem menuAddUser = new JMenuItem("Create a user");
@@ -122,6 +129,22 @@ public class Home extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuDeleteStore) {
                     new DeleteStore(homeFrame, myUser);
+                }
+            }
+        });
+
+        menuAddUserToStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuAddUserToStore) {
+                    new AddUserToStore();
+                }
+            }
+        });
+
+        menuRemoveUserFromStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuRemoveUserFromStore) {
+                    new DeleteUserFromStore();
                 }
             }
         });
