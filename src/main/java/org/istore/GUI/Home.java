@@ -85,7 +85,7 @@ public class Home extends JPanel {
         homeFrame.getContentPane().add(BorderLayout.NORTH, mb);
 
         // home page here with store listing
-        ArrayList<ArrayList<String>> storeList = listingQueries.getStoreList();
+        ArrayList<ArrayList<String>> storeList = listingQueries.getStoreList(myUser.getId());
 
         String header[] = {"ID","Name"};
 

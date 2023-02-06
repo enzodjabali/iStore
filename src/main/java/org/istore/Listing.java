@@ -10,13 +10,20 @@ public class Listing {
     DBManager database = new DBManager();
     Connection connect = database.dbconnect();
 
-    public ArrayList<ArrayList<String>> getStoreList() {
+    public ArrayList<ArrayList<String>> getStoreList(String userId) {
         ArrayList<ArrayList<String>> items = new ArrayList<>();
         try {
             Statement statement;
             statement = connect.createStatement();
             ResultSet resultSet;
-            resultSet = statement.executeQuery("SELECT * FROM stores");
+
+            // Récupérer id user, id des stores.
+
+            resultSet = statement.executeQuery("" +
+                    "SELECT stores.id as 'id', stores.name as 'name' FROM stores_access\n" +
+                    "LEFT JOIN stores ON stores_access.id_store = stores.id\n" +
+                    "WHERE stores_access.id_user = "+userId+"");
+
 
             //Extact result from ResultSet rs
             while (resultSet.next()) {
@@ -98,7 +105,7 @@ public class Listing {
             Statement statement;
             statement = connect.createStatement();
             ResultSet resultSet;
-            resultSet = statement.executeQuery("SELECT * FROM items");
+            resultSet = statement.executeQuery("SELECT * FROM items ");
 
             while (resultSet.next()) {
                 ArrayList<String> item = new ArrayList<>();
