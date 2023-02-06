@@ -58,7 +58,7 @@ public class StoreManager extends Admin {
             System.out.println(e);
         }
     }
-    public boolean addItemToStore(String itemId, int storeId) {
+    public boolean addItemToStore(String itemId, String storeId) {
         try {
             Statement statement;
             statement = connect.createStatement();
@@ -78,14 +78,16 @@ public class StoreManager extends Admin {
         }
         return true;
     }
-    public void deleteItemFromStore(String itemId, int storeId) {
+    public boolean deleteItemFromStore(String itemId, String storeId) {
         try {
             Statement statement = connect.createStatement();
-            String sql = "DELETE FROM inventories WHERE email = '" + itemId + "' AND email = '" + storeId + "'";
+            String sql = "DELETE FROM inventories WHERE id_item = '" + itemId + "' AND id_store = '" + storeId + "'";
             statement.executeUpdate(sql);
+            return true;
         } catch (Exception e){
             System.out.println(e);
         }
+        return false;
     }
     public boolean addEmployeeToStore(int idEmployee, int idStore) {
         try {

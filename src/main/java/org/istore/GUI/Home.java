@@ -196,6 +196,22 @@ public class Home extends JPanel {
             }
         });
 
+        menuAddItemToStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuAddItemToStore) {
+                    new AddItemToStore();
+                }
+            }
+        });
+
+        menuRemoveItemFromStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuRemoveItemFromStore) {
+                    new DeleteItemFromStore();
+                }
+            }
+        });
+
         menuEditMyAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuEditMyAccount) {
