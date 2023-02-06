@@ -75,10 +75,14 @@ public class Home extends JPanel {
             });
         }
 
-        if (myUser.isAdmin(myUser.getId())) {
-            JMenu menuStoreAccess = new JMenu("Stores Access");
-            mb.add(menuStoreAccess);
+        JMenu menuStoreAccess = new JMenu("Stores Access");
+        mb.add(menuStoreAccess);
 
+        JMenuItem menuListUserStore = new JMenuItem("Access list of users from a store");
+        menuStoreAccess.add(menuListUserStore);
+        menuListUserStore.setIcon(accessIcon);
+
+        if (myUser.isAdmin(myUser.getId())) {
             JMenuItem menuAddUserToStore = new JMenuItem("Add a user to a store");
             JMenuItem menuRemoveUserFromStore = new JMenuItem("Remove a user from a store");
             menuStoreAccess.add(menuAddUserToStore);
@@ -268,8 +272,14 @@ public class Home extends JPanel {
         homeFrame.getContentPane().add(new JScrollPane(table));
         homeFrame.setVisible(true);
 
+        menuListUserStore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuListUserStore) {
+                    new AccessUserStoreList();
+                }
+            }
+        });
 
-        // click on access store via menu
         menuAccessStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuAccessStore) {
