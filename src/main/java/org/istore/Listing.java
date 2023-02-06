@@ -99,6 +99,35 @@ public class Listing {
         return items;
     }
 
+    public ArrayList<ArrayList<String>> getUserStoreList(String storeId) {
+        ArrayList<ArrayList<String>> items = new ArrayList<>();
+        try {
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT *\n" +
+                    "FROM users\n" +
+                    "INNER JOIN stores_access ON users.id = stores_access.id_user\n" +
+                    "INNER JOIN stores ON stores_access.id_store = stores.id\n" +
+                    "WHERE stores_access.id_store = " + storeId + ";");
+
+            while (resultSet.next()) {
+                ArrayList<String> item = new ArrayList<>();
+                item.add(resultSet.getString("id"));
+                item.add(resultSet.getString("email"));
+                item.add(resultSet.getString("pseudo"));
+                item.add(resultSet.getString("role"));
+                item.add(resultSet.getString("whitelisted"));
+                item.add(resultSet.getString("name"));
+                items.add(item);
+            }
+            resultSet.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return items;
+    }
+
     public ArrayList<ArrayList<String>> getItemList() {
         ArrayList<ArrayList<String>> items = new ArrayList<>();
         try {
