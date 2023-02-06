@@ -33,6 +33,23 @@ public class User {
         return null;
     }
 
+    public boolean isWhitelisted(String userId) {
+        try {
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT whitelisted FROM users WHERE id = " + userId);
+            if(resultSet.next()) {
+                if (resultSet.getString("whitelisted").equals("1")) {
+                    return true;
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
     public boolean userConnect(String emailToCheck, String pwdToCheck) {
         if (emailToCheck.isEmpty() || pwdToCheck.isEmpty()) {
             return false;
