@@ -1,16 +1,13 @@
 package org.istore.GUI;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import org.istore.Item;
-import org.istore.StoreManager;
-import org.istore.User;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
+import org.istore.Item;
 import static org.istore.GUI.GUI.isNumeric;
 
 public class AddItem extends JPanel {

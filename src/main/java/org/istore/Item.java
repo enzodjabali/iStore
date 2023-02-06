@@ -3,7 +3,7 @@ package org.istore;
 import java.sql.Connection;
 import java.sql.Statement;
 
-public class Item extends Admin {
+public class Item {
     DBManager database = new DBManager();
     Connection connect = database.dbconnect();
 
@@ -32,6 +32,22 @@ public class Item extends Admin {
             Statement statement = connect.createStatement();
             String sql = "DELETE FROM items WHERE id = '" + itemId + "'";
             statement.executeUpdate(sql);
+            return true;
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public boolean updateItem(String itemId, String newName, String newPrice){
+        try {
+            Statement statement = connect.createStatement();
+            String sql = "UPDATE items\n" +
+                    "SET name = '" + newName + "',\n" +
+                    " price = '" + newPrice + "'\n" +
+                    " WHERE id = " + itemId + "";
+            statement.executeUpdate(sql);
+
             return true;
         } catch (Exception e){
             System.out.println(e);

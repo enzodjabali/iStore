@@ -60,11 +60,13 @@ public class Home extends JPanel {
         JMenuItem menuItemList = new JMenuItem("List of items");
         JMenuItem menuAddItem = new JMenuItem("Create an item");
         JMenuItem menuDeleteItem = new JMenuItem("Delete an item");
+        JMenuItem menuEditItem = new JMenuItem("Edit an item");
         JMenuItem menuAddItemToStore = new JMenuItem("Add an item to a store");
         JMenuItem menuRemoveItemFromStore = new JMenuItem("Remove an item from a store");
         menuInventories.add(menuItemList);
         menuInventories.add(menuAddItem);
         menuInventories.add(menuDeleteItem);
+        menuInventories.add(menuEditItem);
         menuInventories.add(menuAddItemToStore);
         menuInventories.add(menuRemoveItemFromStore);
 
@@ -192,6 +194,14 @@ public class Home extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuDeleteItem) {
                     new DeleteItem();
+                }
+            }
+        });
+
+        menuEditItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == menuEditItem) {
+                    new EditItem();
                 }
             }
         });
