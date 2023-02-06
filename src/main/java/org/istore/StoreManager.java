@@ -89,31 +89,33 @@ public class StoreManager extends Admin {
         }
         return false;
     }
-    public boolean addEmployeeToStore(int idEmployee, int idStore) {
+    public boolean addUserToStore(String idUser, String idStore) {
         try {
             Statement statement;
             statement = connect.createStatement();
             ResultSet resultSet;
-            resultSet = statement.executeQuery("SELECT id_user FROM stores_access WHERE id_store = " + idStore + " AND id_user= "+idEmployee+"");
+            resultSet = statement.executeQuery("SELECT id_user FROM stores_access WHERE id_store = " + idStore + " AND id_user= " + idUser);
             if(resultSet.next()) {
                 return false;
             }
             Statement statementInsert = connect.createStatement();
-            String sql = "INSERT INTO stores_access (id_store, id_user) VALUES ('" + idStore + "', '" + idEmployee + "')";
+            String sql = "INSERT INTO stores_access (id_store, id_user) VALUES ('" + idStore + "', '" + idUser + "')";
             statementInsert.executeUpdate(sql);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return true;
     }
-    public void deleteEmployeeFromStore(int idEmployee, int idStore) {
+    public boolean deleteUserFromStore(String idUser, String idStore) {
         try {
             Statement statement = connect.createStatement();
-            String sql = "DELETE FROM stores_access WHERE id_user = '" + idEmployee + "' AND id_store = '" + idStore + "'";
+            String sql = "DELETE FROM stores_access WHERE id_user = '" + idUser + "' AND id_store = '" + idStore + "'";
             statement.executeUpdate(sql);
+            return true;
         } catch (Exception e){
             System.out.println(e);
         }
+        return false;
     }
 
 }
