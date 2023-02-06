@@ -53,6 +53,23 @@ public class User {
         return false;
     }
 
+    public boolean isAdmin(String userId) {
+        try {
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT role FROM users WHERE id = " + userId);
+            if(resultSet.next()) {
+                if (resultSet.getString("role").equals("admin")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
     public boolean userConnect(String emailToCheck, String pwdToCheck) {
         if (emailToCheck.isEmpty() || pwdToCheck.isEmpty()) {
             return false;
