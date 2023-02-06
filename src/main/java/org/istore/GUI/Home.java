@@ -23,6 +23,12 @@ public class Home extends JPanel {
 
         Listing listingQueries = new Listing();
 
+        ImageIcon addIcon = new ImageIcon("assets/icons/add.png");
+        ImageIcon deleteIcon = new ImageIcon("assets/icons/delete.png");
+        ImageIcon editIcon = new ImageIcon("assets/icons/edit.png");
+        ImageIcon listIcon = new ImageIcon("assets/icons/list.png");
+        ImageIcon accessIcon = new ImageIcon("assets/icons/access.png");
+
         //Creating the MenuBar and adding components
         JMenuBar mb = new JMenuBar();
 
@@ -31,14 +37,18 @@ public class Home extends JPanel {
 
         JMenuItem menuAccessStore = new JMenuItem("Access a store");
         menuStore.add(menuAccessStore);
+        menuAccessStore.setIcon(accessIcon);
 
         if (myUser.isAdmin(myUser.getId())) {
             JMenuItem menuAddStore = new JMenuItem("Create a store");
             JMenuItem menuEditStore = new JMenuItem("Edit a store");
             JMenuItem menuDeleteStore = new JMenuItem("Delete a store");
             menuStore.add(menuAddStore);
+            menuAddStore.setIcon(addIcon);
             menuStore.add(menuEditStore);
+            menuEditStore.setIcon(editIcon);
             menuStore.add(menuDeleteStore);
+            menuDeleteStore.setIcon(deleteIcon);
 
             menuAddStore.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -72,7 +82,9 @@ public class Home extends JPanel {
             JMenuItem menuAddUserToStore = new JMenuItem("Add a user to a store");
             JMenuItem menuRemoveUserFromStore = new JMenuItem("Remove a user from a store");
             menuStoreAccess.add(menuAddUserToStore);
+            menuAddUserToStore.setIcon(addIcon);
             menuStoreAccess.add(menuRemoveUserFromStore);
+            menuRemoveUserFromStore.setIcon(deleteIcon);
 
             menuAddUserToStore.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -96,6 +108,7 @@ public class Home extends JPanel {
 
         JMenuItem menuUserList = new JMenuItem("List of users");
         menuUsers.add(menuUserList);
+        menuUserList.setIcon(listIcon);
 
         if (myUser.isAdmin(myUser.getId())) {
             JMenuItem menuAddUser = new JMenuItem("Create a user");
@@ -104,10 +117,15 @@ public class Home extends JPanel {
             JMenuItem menuEditUserRole = new JMenuItem("Edit a user role");
             JMenuItem menuDeleteUser = new JMenuItem("Delete a user");
             menuUsers.add(menuAddUser);
+            menuAddUser.setIcon(addIcon);
             menuUsers.add(menuWhitelistUser);
+            menuWhitelistUser.setIcon(editIcon);
             menuUsers.add(menuEditUser);
+            menuEditUser.setIcon(editIcon);
             menuUsers.add(menuEditUserRole);
+            menuEditUserRole.setIcon(editIcon);
             menuUsers.add(menuDeleteUser);
+            menuDeleteUser.setIcon(deleteIcon);
 
             menuAddUser.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -161,11 +179,17 @@ public class Home extends JPanel {
             JMenuItem menuAddItemToStore = new JMenuItem("Add an item to a store");
             JMenuItem menuRemoveItemFromStore = new JMenuItem("Remove an item from a store");
             menuInventories.add(menuItemList);
+            menuItemList.setIcon(listIcon);
             menuInventories.add(menuAddItem);
+            menuAddItem.setIcon(addIcon);
             menuInventories.add(menuDeleteItem);
+            menuDeleteItem.setIcon(deleteIcon);
             menuInventories.add(menuEditItem);
+            menuEditItem.setIcon(editIcon);
             menuInventories.add(menuAddItemToStore);
+            menuAddItemToStore.setIcon(addIcon);
             menuInventories.add(menuRemoveItemFromStore);
+            menuRemoveItemFromStore.setIcon(deleteIcon);
 
             menuItemList.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -222,7 +246,9 @@ public class Home extends JPanel {
         JMenuItem menuEditMyAccount = new JMenuItem("Edit my account");
         JMenuItem menuDeleteMyAccount = new JMenuItem("Delete my account");
         menuMyAccount.add(menuEditMyAccount);
+        menuEditMyAccount.setIcon(editIcon);
         menuMyAccount.add(menuDeleteMyAccount);
+        menuDeleteMyAccount.setIcon(deleteIcon);
 
         homeFrame.getContentPane().add(BorderLayout.NORTH, mb);
 
