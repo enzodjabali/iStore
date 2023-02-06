@@ -33,18 +33,18 @@ public class User {
         return null;
     }
 
-    public boolean isWhitelisted(String userId) {
+    public boolean isWhitelisted(String userEmail) {
         try {
             Statement statement;
             statement = connect.createStatement();
             ResultSet resultSet;
-            resultSet = statement.executeQuery("SELECT whitelisted FROM users WHERE id = " + userId);
+            resultSet = statement.executeQuery("SELECT whitelisted FROM users WHERE email = '" + userEmail + "'");
             if(resultSet.next()) {
                 if (resultSet.getString("whitelisted").equals("1")) {
                     return true;
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return false;
