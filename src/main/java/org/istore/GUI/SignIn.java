@@ -46,6 +46,8 @@ public class SignIn extends JPanel {
         gbc.gridx = 2;
         add(signUpButton, gbc);
 
+        gbc.gridy = 4;
+        gbc.gridx = 1;
         signInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // this makes sure the button you are pressing is the button variable
@@ -62,16 +64,16 @@ public class SignIn extends JPanel {
                     System.out.println(connect);
 
                     if (connect) {
-                        // connected user
-                        System.out.println("connected");
-                        authFrame.setVisible(false);
-
-                        new Home(myUser);
+                        if (new User().isWhitelisted(emailField.getText())) {
+                            authFrame.setVisible(false);
+                            new Home(myUser);
+                        } else {
+                            gbc.gridy++;
+                            add(new JLabel("<html><b style='color: red;'>Your email is not whitelisted!</b></html>"), gbc);
+                            authFrame.setVisible(true);
+                        }
                     } else {
-                        System.out.println("not connected");
-                        // print error message
-                        gbc.gridy = 5;
-                        gbc.gridx = 1;
+                        gbc.gridy++;
                         add(new JLabel("<html><b style='color: red;'>Wrong email or password!</b></html>"), gbc);
                         authFrame.setVisible(true);
                     }
