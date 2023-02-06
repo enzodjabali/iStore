@@ -40,45 +40,183 @@ public class Home extends JPanel {
         JMenuItem menuAccessStore = new JMenuItem("Access a store");
         menuStore.add(menuAccessStore);
 
-        if (myUser.isWhitelisted(myUser.getEmail())) {
+        if (myUser.isAdmin(myUser.getId())) {
             JMenuItem menuAddStore = new JMenuItem("Create a store");
             JMenuItem menuEditStore = new JMenuItem("Edit a store");
             JMenuItem menuDeleteStore = new JMenuItem("Delete a store");
             menuStore.add(menuAddStore);
             menuStore.add(menuEditStore);
             menuStore.add(menuDeleteStore);
+
+            menuAddStore.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuAddStore) {
+                        new AddStore(homeFrame, myUser);
+                    }
+                }
+            });
+
+            menuEditStore.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuEditStore) {
+                        new EditStore(homeFrame, myUser);
+                    }
+                }
+            });
+
+            menuDeleteStore.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuDeleteStore) {
+                        new DeleteStore(homeFrame, myUser);
+                    }
+                }
+            });
         }
 
-        JMenuItem menuAddUserToStore = new JMenuItem("Add a user to a store");
-        JMenuItem menuRemoveUserFromStore = new JMenuItem("Remove a user from a store");
-        menuStoreAccess.add(menuAddUserToStore);
-        menuStoreAccess.add(menuRemoveUserFromStore);
+        if (myUser.isAdmin(myUser.getId())) {
+            JMenuItem menuAddUserToStore = new JMenuItem("Add a user to a store");
+            JMenuItem menuRemoveUserFromStore = new JMenuItem("Remove a user from a store");
+            menuStoreAccess.add(menuAddUserToStore);
+            menuStoreAccess.add(menuRemoveUserFromStore);
+
+            menuAddUserToStore.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuAddUserToStore) {
+                        new AddUserToStore();
+                    }
+                }
+            });
+
+            menuRemoveUserFromStore.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuRemoveUserFromStore) {
+                        new DeleteUserFromStore();
+                    }
+                }
+            });
+        }
 
         JMenuItem menuUserList = new JMenuItem("List of users");
-        JMenuItem menuAddUser = new JMenuItem("Create a user");
-        JMenuItem menuWhitelistUser = new JMenuItem("Whitelist/blacklist a user");
-        JMenuItem menuEditUser = new JMenuItem("Edit a user");
-        JMenuItem menuEditUserRole = new JMenuItem("Edit a user role");
-        JMenuItem menuDeleteUser = new JMenuItem("Delete a user");
         menuUsers.add(menuUserList);
-        menuUsers.add(menuAddUser);
-        menuUsers.add(menuWhitelistUser);
-        menuUsers.add(menuEditUser);
-        menuUsers.add(menuEditUserRole);
-        menuUsers.add(menuDeleteUser);
 
-        JMenuItem menuItemList = new JMenuItem("List of items");
-        JMenuItem menuAddItem = new JMenuItem("Create an item");
-        JMenuItem menuDeleteItem = new JMenuItem("Delete an item");
-        JMenuItem menuEditItem = new JMenuItem("Edit an item");
-        JMenuItem menuAddItemToStore = new JMenuItem("Add an item to a store");
-        JMenuItem menuRemoveItemFromStore = new JMenuItem("Remove an item from a store");
-        menuInventories.add(menuItemList);
-        menuInventories.add(menuAddItem);
-        menuInventories.add(menuDeleteItem);
-        menuInventories.add(menuEditItem);
-        menuInventories.add(menuAddItemToStore);
-        menuInventories.add(menuRemoveItemFromStore);
+        if (myUser.isAdmin(myUser.getId())) {
+            JMenuItem menuAddUser = new JMenuItem("Create a user");
+            JMenuItem menuWhitelistUser = new JMenuItem("Whitelist/blacklist a user");
+            JMenuItem menuEditUser = new JMenuItem("Edit a user");
+            JMenuItem menuEditUserRole = new JMenuItem("Edit a user role");
+            JMenuItem menuDeleteUser = new JMenuItem("Delete a user");
+            menuUsers.add(menuAddUser);
+            menuUsers.add(menuWhitelistUser);
+            menuUsers.add(menuEditUser);
+            menuUsers.add(menuEditUserRole);
+            menuUsers.add(menuDeleteUser);
+
+            menuAddUser.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuAddUser) {
+                        new SignUp();
+                    }
+                }
+            });
+
+            menuWhitelistUser.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuWhitelistUser) {
+                        new WhitelistUser();
+                    }
+                }
+            });
+
+            menuEditUser.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuEditUser) {
+                        new EditUser();
+                    }
+                }
+            });
+
+            menuEditUserRole.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuEditUserRole) {
+                        new EditUserRole();
+                    }
+                }
+            });
+
+            menuDeleteUser.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuDeleteUser) {
+                        new DeleteUser();
+                    }
+                }
+            });
+        }
+
+
+        if (myUser.isAdmin(myUser.getId())) {
+            JMenuItem menuItemList = new JMenuItem("List of items");
+            JMenuItem menuAddItem = new JMenuItem("Create an item");
+            JMenuItem menuDeleteItem = new JMenuItem("Delete an item");
+            JMenuItem menuEditItem = new JMenuItem("Edit an item");
+            JMenuItem menuAddItemToStore = new JMenuItem("Add an item to a store");
+            JMenuItem menuRemoveItemFromStore = new JMenuItem("Remove an item from a store");
+            menuInventories.add(menuItemList);
+            menuInventories.add(menuAddItem);
+            menuInventories.add(menuDeleteItem);
+            menuInventories.add(menuEditItem);
+            menuInventories.add(menuAddItemToStore);
+            menuInventories.add(menuRemoveItemFromStore);
+
+
+
+            menuItemList.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuItemList) {
+                        new ItemList();
+                    }
+                }
+            });
+
+            menuAddItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuAddItem) {
+                        new AddItem();
+                    }
+                }
+            });
+
+            menuDeleteItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuDeleteItem) {
+                        new DeleteItem();
+                    }
+                }
+            });
+
+            menuEditItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuEditItem) {
+                        new EditItem();
+                    }
+                }
+            });
+
+            menuAddItemToStore.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuAddItemToStore) {
+                        new AddItemToStore();
+                    }
+                }
+            });
+
+            menuRemoveItemFromStore.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == menuRemoveItemFromStore) {
+                        new DeleteItemFromStore();
+                    }
+                }
+            });
+        }
 
         JMenuItem menuEditMyAccount = new JMenuItem("Edit my account");
         JMenuItem menuDeleteMyAccount = new JMenuItem("Delete my account");
@@ -112,46 +250,6 @@ public class Home extends JPanel {
             }
         });
 
-        menuAddStore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuAddStore) {
-                    new AddStore(homeFrame, myUser);
-                }
-            }
-        });
-
-        menuEditStore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuEditStore) {
-                    new EditStore(homeFrame, myUser);
-                }
-            }
-        });
-
-        menuDeleteStore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuDeleteStore) {
-                    new DeleteStore(homeFrame, myUser);
-                }
-            }
-        });
-
-        menuAddUserToStore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuAddUserToStore) {
-                    new AddUserToStore();
-                }
-            }
-        });
-
-        menuRemoveUserFromStore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuRemoveUserFromStore) {
-                    new DeleteUserFromStore();
-                }
-            }
-        });
-
         menuUserList.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuUserList) {
@@ -160,93 +258,6 @@ public class Home extends JPanel {
             }
         });
 
-        menuAddUser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuAddUser) {
-                    new SignUp();
-                }
-            }
-        });
-
-        menuWhitelistUser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuWhitelistUser) {
-                    new WhitelistUser();
-                }
-            }
-        });
-
-        menuEditUser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuEditUser) {
-                    new EditUser();
-                }
-            }
-        });
-
-        menuEditUserRole.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuEditUserRole) {
-                    new EditUserRole();
-                }
-            }
-        });
-
-        menuDeleteUser.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuDeleteUser) {
-                    new DeleteUser();
-                }
-            }
-        });
-
-        menuItemList.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuItemList) {
-                    new ItemList();
-                }
-            }
-        });
-
-        menuAddItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuAddItem) {
-                    new AddItem();
-                }
-            }
-        });
-
-        menuDeleteItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuDeleteItem) {
-                    new DeleteItem();
-                }
-            }
-        });
-
-        menuEditItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuEditItem) {
-                    new EditItem();
-                }
-            }
-        });
-
-        menuAddItemToStore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuAddItemToStore) {
-                    new AddItemToStore();
-                }
-            }
-        });
-
-        menuRemoveItemFromStore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == menuRemoveItemFromStore) {
-                    new DeleteItemFromStore();
-                }
-            }
-        });
 
         menuEditMyAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
