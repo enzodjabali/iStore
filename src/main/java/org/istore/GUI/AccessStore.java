@@ -1,11 +1,14 @@
 package org.istore.GUI;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.istore.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
 
 import static java.lang.Integer.parseInt;
 import static org.istore.GUI.GUI.isNumeric;
@@ -51,7 +54,24 @@ public class AccessStore extends JPanel {
                     if (isNumeric(storeId)) {
                         int storeIdInt = parseInt(storeId);
                         accessStoreFrame.dispatchEvent(new WindowEvent(accessStoreFrame, WindowEvent.WINDOW_CLOSING));
-                        new Store(storeIdInt, userId);
+
+                        if (User.doesStoreExist(storeId)){
+                            if(User.hasUserAccessToStore(storeId, userId)){
+                                new Store(storeIdInt, userId);
+                            } else{
+                                gbc.gridy = 5;
+                                gbc.gridx = 1;
+                                accessStoreFrame.add(new JLabel("<html><b style='color: red;'>You have no rights on this store.</b></html>"), gbc);
+                                accessStoreFrame.setVisible(true);
+                            }
+                        } else{
+                            gbc.gridy = 5;
+                            gbc.gridx = 1;
+                            accessStoreFrame.add(new JLabel("<html><b style='color: red;'>This store does not exist</b></html>"), gbc);
+                            accessStoreFrame.setVisible(true);
+                        }
+
+
                     } else {
                         gbc.gridy = 5;
                         gbc.gridx = 1;

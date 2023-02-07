@@ -31,14 +31,8 @@ public class Store extends JPanel {
                     storeList.get(i).get(3)
             };
         }
-        if(storeList.size() == 0){
-            JLabel object = new JLabel("Ce store n'existe pas OU vous n'avez pas accès à celui-ci");
-            storeFrame.getContentPane().add(new JScrollPane(object));
-            storeFrame.setVisible(true);
-        } else {
-            JTable object = new JTable(data, header);
-            storeFrame.getContentPane().add(new JScrollPane(object));
-            storeFrame.setVisible(true);
-        }
+        JTable object = new JTable(data, header);
+        storeFrame.getContentPane().add(new JScrollPane(object));
+        storeFrame.setVisible(true);
     }
 }
