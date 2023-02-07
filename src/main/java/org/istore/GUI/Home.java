@@ -275,7 +275,7 @@ public class Home extends JPanel {
         menuListUserStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuListUserStore) {
-                    new AccessUserStoreList();
+                    new AccessUserStoreList(idUser);
                 }
             }
         });
@@ -283,7 +283,7 @@ public class Home extends JPanel {
         menuAccessStore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == menuAccessStore) {
-                    new AccessStore();
+                    new AccessStore(myUser.getId());
                 }
             }
         });

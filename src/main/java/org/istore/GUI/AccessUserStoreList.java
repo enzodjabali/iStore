@@ -1,6 +1,8 @@
 package org.istore.GUI;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.istore.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +12,7 @@ import java.awt.event.WindowEvent;
 import static org.istore.GUI.GUI.isNumeric;
 
 public class AccessUserStoreList extends JPanel {
-    public AccessUserStoreList() {
+    public AccessUserStoreList(String userId) {
         Dotenv dotenv = Dotenv.configure().load();
 
         JFrame accessUserStoreListFrame = new JFrame(String.format(dotenv.get("PROJECT_NAME")) + " - Access list of users from a store");
@@ -52,7 +54,22 @@ public class AccessUserStoreList extends JPanel {
 
                     if (isNumeric(storeId)) {
                         accessUserStoreListFrame.dispatchEvent(new WindowEvent(accessUserStoreListFrame, WindowEvent.WINDOW_CLOSING));
-                        new UserStoreList(storeId);
+
+                        if(User.doesStoreExist(storeId)){
+                            if (User.hasUserAccessToStore(storeId, userId)){
+                                new UserStoreList(storeId);
+                            } else {
+                                gbc.gridy = 5;
+                                gbc.gridx = 1;
+                                accessUserStoreListFrame.add(new JLabel("<html><b style='color: red;'>You have no rights on this store.</b></html>"), gbc);
+                                accessUserStoreListFrame.setVisible(true);
+                            }
+                        } else {
+                            gbc.gridy = 5;
+                            gbc.gridx = 1;
+                            accessUserStoreListFrame.add(new JLabel("<html><b style='color: red;'>This store does not exist</b></html>"), gbc);
+                            accessUserStoreListFrame.setVisible(true);
+                        }
                     } else {
                         gbc.gridy++;
                         accessUserStoreListFrame.add(new JLabel("<html><b style='color: red;'>Please, enter a number!</b></html>"), gbc);

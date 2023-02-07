@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class User {
     DBManager database = new DBManager();
@@ -200,6 +201,48 @@ public class User {
             statement.executeUpdate(sql);
             return true;
         } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    public static boolean hasUserAccessToStore(String storeId, String userId){
+        try {
+            DBManager db = new DBManager();
+            Connection connect = db.dbconnect();
+
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT *\n" +
+                    "FROM stores_access\n" +
+                    "WHERE stores_access.id_store = "+storeId+"\n" +
+                    "AND stores_access.id_user = "+userId+"");
+            if(resultSet.next()) {
+                return true;
+            }
+            resultSet.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    public static boolean doesStoreExist(String storeId){
+        try {
+            DBManager db = new DBManager();
+            Connection connect = db.dbconnect();
+
+            Statement statement;
+            statement = connect.createStatement();
+            ResultSet resultSet;
+            resultSet = statement.executeQuery("SELECT *\n" +
+                    "FROM stores\n" +
+                    "WHERE stores.id = " + storeId + "");
+
+            if(resultSet.next()) {
+                return true;
+            }
+            resultSet.close();
+        } catch (Exception e) {
             System.out.println(e);
         }
         return false;
