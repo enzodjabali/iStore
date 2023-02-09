@@ -46,6 +46,9 @@ public class AccessStore extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         accessStoreFrame.add(storeAccessButton, gbc);
 
+        gbc.gridy = 4;
+        gbc.gridx = 1;
+
         storeAccessButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == storeAccessButton) {
@@ -59,27 +62,20 @@ public class AccessStore extends JPanel {
                             if(User.hasUserAccessToStore(storeId, userId)){
                                 new Store(storeIdInt, userId);
                             } else{
-                                gbc.gridy = 5;
-                                gbc.gridx = 1;
+                                gbc.gridy++;
                                 accessStoreFrame.add(new JLabel("<html><b style='color: red;'>You have no rights on this store.</b></html>"), gbc);
                                 accessStoreFrame.setVisible(true);
                             }
                         } else{
-                            gbc.gridy = 5;
-                            gbc.gridx = 1;
+                            gbc.gridy++;
                             accessStoreFrame.add(new JLabel("<html><b style='color: red;'>This store does not exist</b></html>"), gbc);
                             accessStoreFrame.setVisible(true);
                         }
-
-
                     } else {
-                        gbc.gridy = 5;
-                        gbc.gridx = 1;
-
+                        gbc.gridy++;
                         accessStoreFrame.add(new JLabel("<html><b style='color: red;'>Please, enter a number!</b></html>"), gbc);
                         accessStoreFrame.setVisible(true);
                     }
-
                 }
             }
         });

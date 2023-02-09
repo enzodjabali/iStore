@@ -43,6 +43,9 @@ public class DeleteItem extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         deleteItemFrame.add(itemDeleteButton, gbc);
 
+        gbc.gridy = 4;
+        gbc.gridx = 1;
+
         itemDeleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == itemDeleteButton) {
@@ -53,9 +56,7 @@ public class DeleteItem extends JPanel {
                             deleteItemFrame.dispatchEvent(new WindowEvent(deleteItemFrame, WindowEvent.WINDOW_CLOSING));
                         }
                     } else {
-                        gbc.gridy = 5;
-                        gbc.gridx = 1;
-
+                        gbc.gridy++;
                         deleteItemFrame.add(new JLabel("<html><b style='color: red;'>Please, enter a number!</b></html>"), gbc);
                         deleteItemFrame.setVisible(true);
                     }

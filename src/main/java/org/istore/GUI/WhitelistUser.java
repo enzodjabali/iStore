@@ -49,6 +49,8 @@ public class WhitelistUser extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         whitelistUserFrame.add(applyWhitelistButton, gbc);
 
+        gbc.gridy = 4;
+        gbc.gridx = 1;
 
         applyWhitelistButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -56,20 +58,19 @@ public class WhitelistUser extends JPanel {
                     String userId = userIdField.getText();
                     String whitelistState = whitelistStateField.getText();
 
-                    gbc.gridy = 5;
-                    gbc.gridx = 1;
-
                     if (isNumeric(userId) && isNumeric(whitelistState)) {
                         if (whitelistState.equals("0") || whitelistState.equals("1")) {
                             if (new User().whitelistUser(whitelistState, userId)) {
                                 whitelistUserFrame.dispatchEvent(new WindowEvent(whitelistUserFrame, WindowEvent.WINDOW_CLOSING));
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>Whitelist's state has to be 1 or 0!</b></html>");
                             whitelistUserFrame.add(errorMessage, gbc);
                             whitelistUserFrame.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, enter numbers!</b></html>");
                         whitelistUserFrame.add(errorMessage, gbc);
                         whitelistUserFrame.setVisible(true);

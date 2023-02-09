@@ -57,7 +57,7 @@ public class EditUserRole extends JPanel {
                     String userId = userIdField.getText();
                     String newRole = newRoleField.getText();
 
-                    gbc.gridy = 5;
+                    gbc.gridy = 4;
                     gbc.gridx = 1;
 
                     if (isNumeric(userId)) {
@@ -67,16 +67,19 @@ public class EditUserRole extends JPanel {
                                     editUserRole.dispatchEvent(new WindowEvent(editUserRole, WindowEvent.WINDOW_CLOSING));
                                 }
                             } else {
+                                gbc.gridy++;
                                 JLabel errorMessage = new JLabel("<html><b style='color: red;'>The role must be visitor or admin!</b></html>");
                                 editUserRole.add(errorMessage, gbc);
                                 editUserRole.setVisible(true);
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>The role can't be empty!</b></html>");
                             editUserRole.add(errorMessage, gbc);
                             editUserRole.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, enter a number!</b></html>");
                         editUserRole.add(errorMessage, gbc);
                         editUserRole.setVisible(true);

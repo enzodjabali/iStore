@@ -59,14 +59,12 @@ public class AccessUserStoreList extends JPanel {
                             if (User.hasUserAccessToStore(storeId, userId)){
                                 new UserStoreList(storeId);
                             } else {
-                                gbc.gridy = 5;
-                                gbc.gridx = 1;
+                                gbc.gridy++;
                                 accessUserStoreListFrame.add(new JLabel("<html><b style='color: red;'>You have no rights on this store.</b></html>"), gbc);
                                 accessUserStoreListFrame.setVisible(true);
                             }
                         } else {
-                            gbc.gridy = 5;
-                            gbc.gridx = 1;
+                            gbc.gridy++;
                             accessUserStoreListFrame.add(new JLabel("<html><b style='color: red;'>This store does not exist</b></html>"), gbc);
                             accessUserStoreListFrame.setVisible(true);
                         }

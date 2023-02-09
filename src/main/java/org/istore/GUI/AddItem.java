@@ -51,19 +51,19 @@ public class AddItem extends JPanel {
         itemAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == itemAddButton) {
-                    gbc.gridy++;
-
                     if (!itemNameField.getText().isEmpty() && !itemPriceField.getText().isEmpty()) {
                         if (isNumeric(itemPriceField.getText())) {
                             if (new Item().createItem(itemNameField.getText(), itemPriceField.getText())) {
                                 addItemFrame.dispatchEvent(new WindowEvent(addItemFrame, WindowEvent.WINDOW_CLOSING));
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>The price needs to be a number!</b></html>");
                             addItemFrame.add(errorMessage, gbc);
                             addItemFrame.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, fill all the fields!</b></html>");
                         addItemFrame.add(errorMessage, gbc);
                         addItemFrame.setVisible(true);

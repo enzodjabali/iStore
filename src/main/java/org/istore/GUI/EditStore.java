@@ -51,14 +51,15 @@ public class EditStore extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         editStoreFrame.add(editButton, gbc);
 
+        gbc.gridy = 5;
+        gbc.gridx = 1;
 
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == editButton) {
                     String storeId = storeIdField.getText();
 
-                    gbc.gridy = 5;
-                    gbc.gridx = 1;
+
 
                     if (isNumeric(storeId)) {
                         if (!newNameField.getText().isEmpty()) {
@@ -68,11 +69,13 @@ public class EditStore extends JPanel {
                                 new Home(myUser);
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>The store's name can't be empty!</b></html>");
                             editStoreFrame.add(errorMessage, gbc);
                             editStoreFrame.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, enter a number!</b></html>");
                         editStoreFrame.add(errorMessage, gbc);
                         editStoreFrame.setVisible(true);

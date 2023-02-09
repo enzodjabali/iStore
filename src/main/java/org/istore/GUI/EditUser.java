@@ -60,6 +60,9 @@ public class EditUser extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         editUserFrame.add(editButton, gbc);
 
+        gbc.gridy = 5;
+        gbc.gridx = 1;
+
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == editButton) {
@@ -68,20 +71,19 @@ public class EditUser extends JPanel {
                     String newEmail = emailField.getText();
                     String newPassword = emailField.getText();
 
-                    gbc.gridy = 6;
-                    gbc.gridx = 1;
-
                     if (isNumeric(userId)) {
                         if (!newPseudo.isEmpty() && !newEmail.isEmpty() && !newPassword.isEmpty()) {
                             if (new User().userUpdate(userId, newPseudo, newEmail, newPassword)) {
                                 editUserFrame.dispatchEvent(new WindowEvent(editUserFrame, WindowEvent.WINDOW_CLOSING));
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, fill all the fields!</b></html>");
                             editUserFrame.add(errorMessage, gbc);
                             editUserFrame.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>The user ID needs to be a number!</b></html>");
                         editUserFrame.add(errorMessage, gbc);
                         editUserFrame.setVisible(true);

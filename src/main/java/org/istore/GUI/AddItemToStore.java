@@ -51,19 +51,19 @@ public class AddItemToStore extends JPanel {
         itemAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == itemAddButton) {
-                    gbc.gridy++;
-
                     if (!itemIdField.getText().isEmpty() && !storeIdField.getText().isEmpty()) {
                         if (isNumeric(itemIdField.getText()) && isNumeric(storeIdField.getText())) {
                             if (new StoreManager().addItemToStore(itemIdField.getText(), storeIdField.getText())) {
                                 addItemToStoreFrame.dispatchEvent(new WindowEvent(addItemToStoreFrame, WindowEvent.WINDOW_CLOSING));
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>The fields need to be numbers!</b></html>");
                             addItemToStoreFrame.add(errorMessage, gbc);
                             addItemToStoreFrame.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, fill all the fields!</b></html>");
                         addItemToStoreFrame.add(errorMessage, gbc);
                         addItemToStoreFrame.setVisible(true);

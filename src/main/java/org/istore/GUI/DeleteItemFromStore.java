@@ -51,19 +51,19 @@ public class DeleteItemFromStore extends JPanel {
         itemDeleteFromStoreButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == itemDeleteFromStoreButton) {
-                    gbc.gridy++;
-
                     if (!itemIdField.getText().isEmpty() && !storeIdField.getText().isEmpty()) {
                         if (isNumeric(itemIdField.getText()) && isNumeric(storeIdField.getText())) {
                             if (new StoreManager().deleteItemFromStore(itemIdField.getText(), storeIdField.getText())) {
                                 deleteItemFromStoreFrame.dispatchEvent(new WindowEvent(deleteItemFromStoreFrame, WindowEvent.WINDOW_CLOSING));
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>The fields need to be numbers!</b></html>");
                             deleteItemFromStoreFrame.add(errorMessage, gbc);
                             deleteItemFromStoreFrame.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, fill all the fields!</b></html>");
                         deleteItemFromStoreFrame.add(errorMessage, gbc);
                         deleteItemFromStoreFrame.setVisible(true);

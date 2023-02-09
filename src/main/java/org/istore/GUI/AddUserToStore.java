@@ -51,19 +51,19 @@ public class AddUserToStore extends JPanel {
         userAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == userAddButton) {
-                    gbc.gridy++;
-
                     if (!userIdField.getText().isEmpty() && !storeIdField.getText().isEmpty()) {
                         if (isNumeric(userIdField.getText()) && isNumeric(storeIdField.getText())) {
                             if (new StoreManager().addUserToStore(userIdField.getText(), storeIdField.getText())) {
                                 addUserToStoreFrame.dispatchEvent(new WindowEvent(addUserToStoreFrame, WindowEvent.WINDOW_CLOSING));
                             }
                         } else {
+                            gbc.gridy++;
                             JLabel errorMessage = new JLabel("<html><b style='color: red;'>The fields need to be numbers!</b></html>");
                             addUserToStoreFrame.add(errorMessage, gbc);
                             addUserToStoreFrame.setVisible(true);
                         }
                     } else {
+                        gbc.gridy++;
                         JLabel errorMessage = new JLabel("<html><b style='color: red;'>Please, fill all the fields!</b></html>");
                         addUserToStoreFrame.add(errorMessage, gbc);
                         addUserToStoreFrame.setVisible(true);
