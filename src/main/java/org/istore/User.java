@@ -54,8 +54,10 @@ public class User {
         return false;
     }
 
-    public boolean isAdmin(String userId) {
+    public static boolean isAdmin(String userId) {
         try {
+            DBManager database = new DBManager();
+            Connection connect = database.dbconnect();
             Statement statement;
             statement = connect.createStatement();
             ResultSet resultSet;

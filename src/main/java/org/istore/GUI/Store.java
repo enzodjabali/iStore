@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Store extends JPanel {
 
-    public Store(int storeId, String userId) {
+    public Store(int storeId, String userId, boolean isAdmin) {
         Dotenv dotenv = Dotenv.configure().load();
         Listing listingQueries = new Listing();
 
@@ -18,7 +18,7 @@ public class Store extends JPanel {
         storeFrame.setLocationRelativeTo(null);
         storeFrame.setVisible(true);
 
-        ArrayList<ArrayList<String>> storeList = listingQueries.getStoreItems(storeId, userId);
+        ArrayList<ArrayList<String>> storeList = listingQueries.getStoreItems(storeId, userId, isAdmin);
 
         String header[] = {"ID", "Name", "Price", "Store"};
 
