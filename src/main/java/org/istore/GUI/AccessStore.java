@@ -60,7 +60,11 @@ public class AccessStore extends JPanel {
 
                         if (User.doesStoreExist(storeId)){
                             if(User.hasUserAccessToStore(storeId, userId)){
-                                new Store(storeIdInt, userId);
+                                new Store(storeIdInt, userId, false);
+                                //regarder si idAdmin, remttre la fonction en statique
+                            } else if (User.isAdmin(userId)) {
+                                System.out.println("All good here");
+                                new Store(storeIdInt, userId, true);
                             } else{
                                 gbc.gridy++;
                                 accessStoreFrame.add(new JLabel("<html><b style='color: red;'>You have no rights on this store.</b></html>"), gbc);
