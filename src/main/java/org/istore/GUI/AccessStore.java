@@ -63,7 +63,6 @@ public class AccessStore extends JPanel {
                                 new Store(storeIdInt, userId, false);
                                 //regarder si idAdmin, remttre la fonction en statique
                             } else if (User.isAdmin(userId)) {
-                                System.out.println("All good here");
                                 new Store(storeIdInt, userId, true);
                             } else{
                                 gbc.gridy++;

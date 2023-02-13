@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class StoreManager extends Admin {
+public class StoreManager {
     DBManager database = new DBManager();
     Connection connect = database.dbconnect();
     public boolean createStore(String storeName) {
